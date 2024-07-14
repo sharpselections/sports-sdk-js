@@ -1,5 +1,7 @@
 {
+  "name": "sports-sdk",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -8,7 +10,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo build --filter=docs^... && changeset publish"
+    "release": "turbo build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
@@ -19,6 +21,5 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
-  },
-  "name": "with-changesets"
+  }
 }

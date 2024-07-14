@@ -1,20 +1,19 @@
 {
-  "name": "@acme/eslint-config",
+  "name": "@sports-sdk/eslint-config",
   "version": "0.0.0",
   "private": true,
   "files": [
-    "library.js",
-    "next.js",
-    "react-internal.js"
+    "library.js"
   ],
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.1.4",
-    "@typescript-eslint/eslint-plugin": "^7.1.0",
-    "@typescript-eslint/parser": "^7.1.0",
-    "@vercel/style-guide": "^5.2.0",
+    "@next/eslint-plugin-next": "^14.2.4",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "@vercel/style-guide": "^6.0.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-turbo": "^2.0.0",
+    "eslint-config-turbo": "^2.0.4",
     "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-unused-imports": "^4.0.0",
     "typescript": "^5.3.3"
   }
 }

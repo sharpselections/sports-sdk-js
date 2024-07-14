@@ -1,0 +1,2 @@
+# `@sports-sdk/core`
+A thin package with anything that can be used across multiple vendor specific clients. You should not need to install this directly as it will be installed when installing a specific client.
