@@ -1,0 +1,19 @@
+{
+  "extends": "@sports-sdk/tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
