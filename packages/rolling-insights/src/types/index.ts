@@ -1,8 +1,8 @@
-import {Sport} from "@sports-sdk/core";
 import * as nba from "./nba";
 import * as nhl from "./nhl";
 import * as nfl from "./nfl";
 import * as mlb from "./mlb";
+import {Sport} from "@sports-sdk/core";
 
 export type { MlbTeamInfo, MlbPlayerInfo, MlbPlayerStats, MlbSchedule, MlbTeamStats } from "./mlb";
 export {
@@ -22,43 +22,43 @@ export {
 } from "./nhl";
 
 export type SportScheduleMap = {
-	[Sport.NBA]: nba.NbaSchedule;
-	[Sport.NHL]: nhl.NhlSchedule;
-	[Sport.NFL]: nfl.NflSchedule;
-	[Sport.MLB]: mlb.MlbSchedule;
 	[Sport.EPL]: mlb.MlbSchedule;
+	[Sport.MLB]: mlb.MlbSchedule;
+	[Sport.NBA]: nba.NbaSchedule;
 	[Sport.NCAAF]: mlb.MlbSchedule;
+	[Sport.NFL]: nfl.NflSchedule;
+	[Sport.NHL]: nhl.NhlSchedule;
 };
 
 export type SportTeamInfoMap = {
-	[Sport.NBA]: nba.NbaTeamInfo;
-	[Sport.NHL]: nhl.NhlTeamInfo;
-	[Sport.NFL]: nfl.NflTeamInfo;
-	[Sport.MLB]: mlb.MlbTeamInfo;
 	[Sport.EPL]: mlb.MlbTeamInfo;
+	[Sport.MLB]: mlb.MlbTeamInfo;
+	[Sport.NBA]: nba.NbaTeamInfo;
 	[Sport.NCAAF]: mlb.MlbTeamInfo;
+	[Sport.NFL]: nfl.NflTeamInfo;
+	[Sport.NHL]: nhl.NhlTeamInfo;
 };
 export type SportPlayerInfoMap = {
-	[Sport.NBA]: nba.NbaPlayerInfo;
-	[Sport.NHL]: nhl.NhlPlayerInfo;
-	[Sport.NFL]: nfl.NflPlayerInfo;
-	[Sport.MLB]: mlb.MlbPlayerInfo;
 	[Sport.EPL]: mlb.MlbPlayerInfo;
+	[Sport.MLB]: mlb.MlbPlayerInfo;
+	[Sport.NBA]: nba.NbaPlayerInfo;
 	[Sport.NCAAF]: mlb.MlbPlayerInfo;
+	[Sport.NFL]: nfl.NflPlayerInfo;
+	[Sport.NHL]: nhl.NhlPlayerInfo;
 };
 export type SportTeamStatsMap = {
-	[Sport.NBA]: nba.NbaTeamStats;
-	[Sport.NHL]: nhl.NhlTeamStats;
-	[Sport.NFL]: nfl.NflTeamStats;
-	[Sport.MLB]: mlb.MlbTeamStats;
 	[Sport.EPL]: mlb.MlbTeamStats;
+	[Sport.MLB]: mlb.MlbTeamStats;
+	[Sport.NBA]: nba.NbaTeamStats;
 	[Sport.NCAAF]: mlb.MlbTeamStats;
+	[Sport.NFL]: nfl.NflTeamStats;
+	[Sport.NHL]: nhl.NhlTeamStats;
 };
 export type SportPlayerStatsMap = {
-	[Sport.NBA]: nba.NbaPlayerStats;
-	[Sport.NHL]: nhl.NhlPlayerStats;
-	[Sport.NFL]: nfl.NflPlayerStats;
-	[Sport.MLB]: mlb.MlbPlayerStats;
 	[Sport.EPL]: mlb.MlbPlayerStats;
+	[Sport.MLB]: mlb.MlbPlayerStats;
+	[Sport.NBA]: nba.NbaPlayerStats;
 	[Sport.NCAAF]: mlb.MlbPlayerStats;
+	[Sport.NFL]: nfl.NflPlayerStats;
+	[Sport.NHL]: nhl.NhlPlayerStats;
 };

@@ -10,12 +10,12 @@ describe("NHL Rotowire Client", () => {
         testCases: [
             {
                 method: "getNews",
-                path: "/News.php",
-                query: true,
                 liveTests: {
                     properties: ['Date', 'Updates'],
                 },
                 nockTests: {
+                    path: "/News.php",
+                    query: true,
                     expectedResponse: {
                         "Date": "2018-04-05",
                         "Updates": [
@@ -48,12 +48,12 @@ describe("NHL Rotowire Client", () => {
             },
             {
                 method: "getInjuries",
-                path: "/Injuries.php",
-                query: true,
                 liveTests: {
                     properties: ['Players'],
                 },
                 nockTests: {
+                    path: "/Injuries.php",
+                    query: true,
                     expectedResponse: {
                         "Players": [
                             {

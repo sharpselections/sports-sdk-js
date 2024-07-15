@@ -1,4 +1,3 @@
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
 import {
     SportPlayerInfoMap,
     SportPlayerStatsMap,
@@ -6,6 +5,7 @@ import {
     SportTeamInfoMap,
     SportTeamStatsMap,
 } from "./types";
+import {Sport, SportsSdkClient} from "@sports-sdk/core";
 
 /**
  * Type for additional parameters used in API requests.

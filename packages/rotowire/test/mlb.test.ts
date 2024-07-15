@@ -10,12 +10,12 @@ describe("MLB Rotowire Client", () => {
         testCases: [
             {
                 method: "getNews",
-                path: "/News.php",
-                query: true,
                 liveTests: {
                     properties: ['Date', 'Updates'],
                 },
                 nockTests: {
+                    path: "/News.php",
+                    query: true,
                     expectedResponse: {
                         "Date": "2017-10-31",
                         "Updates": [
@@ -55,12 +55,12 @@ describe("MLB Rotowire Client", () => {
             },
             {
                 method: "getInjuries",
-                path: "/Injuries.php",
-                query: true,
                 liveTests: {
                     properties: ['Players'],
                 },
                 nockTests: {
+                    path: "/Injuries.php",
+                    query: true,
                     expectedResponse: {
                         "Players": [
                             {
@@ -92,12 +92,12 @@ describe("MLB Rotowire Client", () => {
             },
             {
                 method: "getLineups",
-                path: "/ExpectedLineups.php",
-                query: true,
                 liveTests: {
                     properties: ['Games'],
                 },
                 nockTests: {
+                    path: "/ExpectedLineups.php",
+                    query: true,
                     expectedResponse: {
                         "Date": "2019-06-15",
                         "Games": [

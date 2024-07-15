@@ -1,4 +1,3 @@
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
 import {
     Draft,
     DraftPick,
@@ -11,6 +10,7 @@ import {
     User,
     UserInfo
 } from "./types.ts";
+import {Sport, SportsSdkClient} from "@sports-sdk/core";
 
 export class SleeperClient extends SportsSdkClient {
     constructor() {
@@ -45,8 +45,6 @@ export class SleeperClient extends SportsSdkClient {
     /**
      * Lookup the user. This call is useful to determine the user ID for a given username. Usernames can change, but user IDs will not.
      * @param user - The username to lookup.
-     * @param uiStream - The UI stream for updates.
-     * @param sharpUser - The sharp user object to update.
      * @returns The user details.
      */
     async userLookup({user}: { user: string }): Promise<User> {

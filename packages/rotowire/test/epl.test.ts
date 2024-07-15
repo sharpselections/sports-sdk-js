@@ -10,12 +10,12 @@ describe("EPL Rotowire Client", () => {
         testCases: [
             {
                 method: "getNews",
-                path: "/News.php",
-                query: true,
                 liveTests: {
                     properties: ['Date', 'Updates'],
                 },
                 nockTests: {
+                    path: "/News.php",
+                    query: true,
                     expectedResponse: {
                         "Date": "2018-04-13",
                         "Updates": [
@@ -44,12 +44,12 @@ describe("EPL Rotowire Client", () => {
             },
             {
                 method: "getInjuries",
-                path: "/Injuries.php",
-                query: true,
                 liveTests: {
                     properties: ['Players'],
                 },
                 nockTests: {
+                    path: "/Injuries.php",
+                    query: true,
                     expectedResponse: {
                         "League": "EPL",
                         "Players": [
@@ -70,12 +70,12 @@ describe("EPL Rotowire Client", () => {
             },
             {
                 method: "getLineups",
-                path: "/Lineups.php",
-                query: true,
                 liveTests: {
                     properties: ['Games', 'Season', 'Week'],
                 },
                 nockTests: {
+                    path: "/Lineups.php",
+                    query: true,
                     expectedResponse: {
                         "Season": 2020,
                         "Week": 1,

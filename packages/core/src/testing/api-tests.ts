@@ -1,14 +1,13 @@
 import nock from "nock";
-import * as console from "node:console";
 
 export interface ApiTestCases<T> {
     // method to call on the passed client
     method: keyof T;
-    // path to mock
-    path: string;
-    // whether query params will be passed
-    query: boolean;
     nockTests?: {
+        // path to mock
+        path: string;
+        // whether query params will be passed
+        query: boolean;
         // expected response result
         expectedResponse: any;
         // expected result from the method call; if undefined expectedResponse will be passed in the expect case
@@ -30,9 +29,9 @@ export const nockApiTests = <T>(client: T, nockEndpoint: nock.Scope, testCases: 
         nock.cleanAll();
     });
     describe("with nock", () => {
-        testCases.forEach(({method, path, nockTests, query, params}) => {
+        testCases.forEach(({method,  nockTests, params}) => {
             if (nockTests) {
-                const {expectedResult, expectedResponse} = nockTests;
+                const {path, expectedResult, expectedResponse, query} = nockTests;
                 test(`getting ${path}`, async () => {
                     nockEndpoint.get(path).query(query).reply(200, expectedResponse);
                     const result = await (client[method] as (params: any) => Promise<any>)(params ?? {});
@@ -45,11 +44,11 @@ export const nockApiTests = <T>(client: T, nockEndpoint: nock.Scope, testCases: 
 
 export const liveApiTests = <T>(client: T, testCases: Array<ApiTestCases<T>>) => {
     describe("with the live endpoint", () => {
-        testCases.forEach(({method, path, liveTests, params}) => {
+        testCases.forEach(({method, liveTests, params}) => {
             if (liveTests) {
                 const {passes, properties} = liveTests;
                 if (passes !== undefined || properties?.length) {
-                    test(`getting ${path}`, async () => {
+                    test(`getting ${method.toString()}`, async () => {
                         try {
                             const result = await (client[method] as (params: any) => Promise<any>)(params ?? {});
                             properties?.forEach(property => {

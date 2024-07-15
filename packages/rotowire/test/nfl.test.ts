@@ -10,12 +10,12 @@ describe("NFL Rotowire Client", () => {
         testCases: [
             {
                 method: "getNews",
-                path: "/News.php",
-                query: true,
                 liveTests: {
                     properties: ['Date', 'Updates'],
                 },
                 nockTests: {
+                    path: "/News.php",
+                    query: true,
                     expectedResponse: {
                         "League": "NFL",
                         "Date": "2018-04-12",
@@ -53,12 +53,12 @@ describe("NFL Rotowire Client", () => {
             },
             {
                 method: "getInjuries",
-                path: "/Injuries.php",
-                query: true,
                 liveTests: {
                     properties: ['Players'],
                 },
                 nockTests: {
+                    path: "/Injuries.php",
+                    query: true,
                     expectedResponse: {
                         "Players": [
                             {
