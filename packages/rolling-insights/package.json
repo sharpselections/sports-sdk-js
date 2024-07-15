@@ -1,6 +1,24 @@
 {
   "name": "@sports-sdk/rolling-insights",
-  "version": "1.0.0",
+  "description": "A package for interacting with the Rolling Insights DataFeeds API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharpselections/sports-sdk-js.git",
+    "directory": "packages/rolling-insights"
+  },
+  "license": "MIT",
+  "keywords": [
+    "rolling insights",
+    "data feeds",
+    "sports",
+    "fantasy sports",
+    "NFL",
+    "NBA",
+    "NHL",
+    "MLB",
+    "sports data"
+  ],
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "module": "dist/index.esm.js",
   "types": "./dist/index.d.ts",

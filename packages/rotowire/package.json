@@ -1,6 +1,25 @@
 {
   "name": "@sports-sdk/rotowire",
-  "version": "1.0.0",
+  "description": "A package for interacting with the RotoWire API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharpselections/sports-sdk-js.git",
+    "directory": "packages/rotowire"
+  },
+  "license": "MIT",
+  "keywords": [
+    "rotowire",
+    "sports news",
+    "sports",
+    "fantasy sports",
+    "NFL",
+    "NBA",
+    "NHL",
+    "MLB",
+    "NCAAF",
+    "EPL"
+  ],
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "module": "dist/index.esm.js",
   "types": "./dist/index.d.ts",
