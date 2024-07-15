@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { nullish } from "@sharp-selections/dsp-types";
+import { nullish } from "@sports-sdk/core";
 
 export const NflPlayerInfoSchema = z.object({
   player_id: z.number(),

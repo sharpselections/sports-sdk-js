@@ -1,5 +1,4 @@
 import { z } from "zod";
-import exp from "node:constants";
 
 export const NhlScheduleSchema = z.object({
 	away_team: z.string(),

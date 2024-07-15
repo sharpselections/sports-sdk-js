@@ -1,4 +1,4 @@
-export { DataFeedsClient } from "./client";
+export { RollingInsightsClient } from "./client";
 export type {
 	MlbTeamInfo,
 	MlbPlayerInfo,
