@@ -21,6 +21,7 @@ describe("Fantasy Nerds client live tests", () => {
         "getBestBallRankings": [Sport.NFL],
         "getByeWeeks": [Sport.NFL],
         "getDefensiveRanks": [Sport.NFL],
+        "getDynastyRankings": [Sport.NFL],
         "getFantasyLeaders": [Sport.NFL],
         "getInjuryReports": [Sport.NFL, Sport.NBA],
         "getNflPicks": [Sport.NFL],

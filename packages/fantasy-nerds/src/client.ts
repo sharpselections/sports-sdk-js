@@ -225,6 +225,17 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
     }
 
     /**
+     * Retrieves dynasty rankings for NFL.
+     * @supports NFL
+     */
+    public async getDynastyRankings(): Promise<NFLRankingsResponse> {
+        if (this.sport !== Sport.NFL) {
+            throw new Error("Dynasty Rankings are only available for NFL.");
+        }
+        return this.request<NFLRankingsResponse>({apiPath: "/dynasty"});
+    }
+
+    /**
      * Retrieves fantasy leaders for NFL.
      * @supports NFL
      */
