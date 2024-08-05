@@ -6,7 +6,8 @@ import {
     DraftProjections,
     DraftRankings,
     DraftRankingsParams,
-    FantasyLeadersParams, Injuries,
+    FantasyLeadersParams,
+    Injuries,
     Lineups,
     LineupsParams,
     PlayerRater,
@@ -19,11 +20,19 @@ import {
 import {
     NFLByesResponse,
     NFLDefensiveRanksResponse,
+    NFLDraftRankingsResponseSchema,
     NFLFantasyLeadersResponse,
     NFLPicksResponse,
-    NFLPlayerADPResponse, NFLPlayoffProjectionsResponse,
-    NFLRankingsResponse, NFLROSProjectionsResponse, NFLWeeklyProjectionsResponse, NFLWeeklyRankingsResponse
+    NFLPlayerADPResponse,
+    NFLPlayoffProjectionsResponse,
+    NFLRankingsResponse,
+    NFLROSProjectionsResponse,
+    NFLWeeklyProjectionsResponse,
+    NFLWeeklyRankingsResponse
 } from "./responses/nfl.ts";
+import {ZodObject} from "zod";
+import {NBADraftRankingsResponseSchema} from "./responses/nba.ts";
+import {MLBDraftRankingsResponseSchema} from "./responses/mlb.ts";
 
 export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> extends SportsSdkClient {
     protected readonly apiToken: string;
@@ -49,12 +58,14 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * Sends a GET request to the specified URL with the provided parameters.
      * @param apiPath - The path to append to the URL when sending the request.
      * @param additionalParams - Additional query parameters for the request.
+     * @param parser - Optional ZodObject to parse the response data before returning it as T
      * @returns The response data from the API.
      * @throws Will throw an error if the request fails.
      */
-    protected async request<T>({apiPath, additionalParams = {}}: {
+    protected async request<T>({apiPath, additionalParams = {}, parser}: {
         apiPath: string,
-        additionalParams?: RequestParams
+        additionalParams?: RequestParams,
+        parser?: ZodObject<any>
     }): Promise<T> {
         const params = {apikey: this.apiToken, ...additionalParams};
         const response = await this.session.get(apiPath, {params});
@@ -62,7 +73,8 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
         if (response.status !== 200) {
             throw new Error(`Failed to get a valid response: status code ${response.status}, response body ${response.data}`);
         }
-        return response.data as T;
+        const result = parser?.parse(response.data) ?? response.data;
+        return result as T;
     }
 
     /**
@@ -86,11 +98,17 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL, NBA, MLB
      */
     public async getDraftRankings(params?: DraftRankingsParams): Promise<DraftRankings<T>> {
+        // Abstract this out to be more generic if this pattern is more widely needed
+        const parser = this.sport === Sport.NFL ? NFLDraftRankingsResponseSchema :
+            this.sport === Sport.NBA ? NBADraftRankingsResponseSchema :
+                MLBDraftRankingsResponseSchema
         return this.request<DraftRankings<T>>({
             apiPath: "/draft-rankings",
-            additionalParams: params
+            additionalParams: params,
+            parser
         });
     }
+
 
     /**
      * Retrieves news for the selected sport.

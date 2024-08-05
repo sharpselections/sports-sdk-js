@@ -5,8 +5,8 @@ export const PlayerRankingsSchema = z.object({
     name: z.string().describe("The player or team name"),
     team: z.string().describe("An alias of team_code"),
     position: z.string().describe("A player's primary position"),
-    // NBA returns rank as string; maybe refactor to parse to number in future?
-    rank: z.union([z.number(), z.string()]).describe("An ordinal ranking"),
+    // NBA returns this as string, making design choice to parse as a number
+    rank: z.coerce.number().describe("An ordinal ranking"),
     rank_position: z.number().describe("The player's rank among players of the same position")
 });
 
