@@ -44,6 +44,14 @@ describe("Fantasy Nerds client live tests", () => {
                 nockEndpoint,
                 testCases
             });
+            test("Can successfully access parsed data", async () => {
+                const playerRankings = await client.getDraftRankings();
+                console.log(playerRankings);
+                const rank1Player = playerRankings.players[0];
+                // this can be a number or string, convert to string for testing
+                expect(rank1Player.rank.toString()).toEqual("1");
+                expect(rank1Player.rank_position).toEqual(1);
+            })
         })
     });
 });

@@ -56,7 +56,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
         apiPath: string,
         additionalParams?: RequestParams
     }): Promise<T> {
-        const params = {apiKey: this.apiToken, ...additionalParams};
+        const params = {apikey: this.apiToken, ...additionalParams};
         const response = await this.session.get(apiPath, {params});
 
         if (response.status !== 200) {
