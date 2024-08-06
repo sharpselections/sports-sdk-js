@@ -35,9 +35,6 @@ export const InjurySideSchema = z.union([
 
 export type InjurySide = z.infer<typeof InjurySideSchema>;
 
-export const LineupStatusSchema = z.union([z.literal("X"), z.literal("C")])
-
-export type LineupStatus = z.infer<typeof LineupStatusSchema>;
 export const BaseNewsResponseSchema = z.object({
   Date: z.string(),
   Updates: z.array(UpdatesSchema)

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { LineupStatusSchema } from "../common/news";
-import { MLBPlayerSchema, MLBTeamCodeSchema } from "./news";
+import {MLBPlayerSchema, MLBTeamCodeSchema} from "../news/baseball.ts";
+import {LineupStatusSchema} from "./common.ts";
 
 export const MLBLineupsParametersSchema = z.object({
   date: z.string().optional(),

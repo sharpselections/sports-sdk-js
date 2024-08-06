@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { BaseNewsResponseSchema, UpdatesSchema } from "../common/news";
+import { BaseNewsResponseSchema, UpdatesSchema } from "./common";
 
 const SoccerNewsPrioritySchema = z.union([
-  z.literal(1).describe("Biggest News"),
-  z.literal(2).describe("Top Players"),
-  z.literal(3).describe("Regular News"),
-  z.literal(4).describe("Depth/Backup Players"),
-  z.literal(5).describe("Non-Fantasy")
+  z.literal("1").describe("Biggest News"),
+  z.literal("2").describe("Top Players"),
+  z.literal("3").describe("Regular News"),
+  z.literal("4").describe("Depth/Backup Players"),
+  z.literal("5").describe("Non-Fantasy")
 ]);
 
 export const PositionSchema = z.union([

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { LineupStatusSchema } from "../common/news";
-import { NBAPlayerSchema, NBATeamCodeSchema } from "./news";
+import {NBAPlayerSchema, NBATeamCodeSchema} from "../news/basketball.ts";
+import {LineupStatusSchema} from "./common.ts";
 
 export const NBALineupsParametersSchema = z.object({
   date: z.string().optional().describe("Optional date parameter"),

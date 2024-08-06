@@ -1,12 +1,12 @@
 import {z} from "zod";
-import {BaseNewsResponseSchema, UpdatesSchema} from "../common/news";
+import {BaseNewsResponseSchema, UpdatesSchema} from "./common";
 
 const NewsPrioritySchema = z.union([
-    z.literal(1).describe("Biggest News"),
-    z.literal(2).describe("Top Players"),
-    z.literal(3).describe("Regular News"),
-    z.literal(4).describe("IDP or skill position depth"),
-    z.literal(5).describe("O-Line/Non-Fantasy")
+    z.literal("1").describe("Biggest News"),
+    z.literal("2").describe("Top Players"),
+    z.literal("3").describe("Regular News"),
+    z.literal("4").describe("IDP or skill position depth"),
+    z.literal("5").describe("O-Line/Non-Fantasy")
 ]);
 
 const FootballInjuryStatusSchema = z.union([

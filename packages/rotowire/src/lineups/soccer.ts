@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { LineupStatusSchema } from "../common/news";
-import { PositionSchema } from "./news";
+import {PositionSchema} from "../news/soccer.ts";
+import {LineupStatusSchema} from "./common.ts";
 
 export const SoccerLineupsParametersSchema = z.object({
   season: z.number().optional().describe("Optional season parameter"),

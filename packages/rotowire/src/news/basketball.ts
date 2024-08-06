@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { BaseNewsResponseSchema, UpdatesSchema } from "../common/news";
+import { BaseNewsResponseSchema, UpdatesSchema } from "./common";
 
 export const NBANewsPrioritySchema = z.union([
-    z.literal(1).describe("Biggest News"),
-    z.literal(2).describe("Substantive News"),
-    z.literal(3).describe("Regular News"),
-    z.literal(4).describe("G-league/summer league/foreign/exhibition"),
-    z.literal(5).describe("Non-fantasy"),
+    z.literal("1").describe("Biggest News"),
+    z.literal("2").describe("Substantive News"),
+    z.literal("3").describe("Regular News"),
+    z.literal("4").describe("G-league/summer league/foreign/exhibition"),
+    z.literal("5").describe("Non-fantasy"),
 ]);
 
 export const NBAInjuryStatusSchema = z.union([

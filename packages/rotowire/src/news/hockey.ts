@@ -1,13 +1,13 @@
 import { z } from "zod";
-import { BaseNewsResponseSchema, UpdatesSchema } from "../common/news";
+import { BaseNewsResponseSchema, UpdatesSchema } from "./common";
 
 
 const NHLNewsPrioritySchema = z.union([
-  z.literal(1).describe("Biggest News"),
-  z.literal(2).describe("Top Players"),
-  z.literal(3).describe("Regular News"),
-  z.literal(4).describe("Minor leagues"),
-  z.literal(5).describe("Foreign/Non-Fantasy")
+  z.literal("1").describe("Biggest News"),
+  z.literal("2").describe("Top Players"),
+  z.literal("3").describe("Regular News"),
+  z.literal("4").describe("Minor leagues"),
+  z.literal("5").describe("Foreign/Non-Fantasy")
 ]);
 
 const NHLInjuryStatusSchema = z.union([

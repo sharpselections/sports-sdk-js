@@ -4,7 +4,7 @@ import {
     InjurySideSchema,
     NewsParametersSchema,
     UpdatesSchema
-} from "../common/news";
+} from "./common";
 
 export const MLBNewsParametersSchema = NewsParametersSchema.extend({
     team: z.string().optional(),
@@ -13,11 +13,11 @@ export const MLBNewsParametersSchema = NewsParametersSchema.extend({
 export type MLBNewsParameters = z.infer<typeof MLBNewsParametersSchema>;
 
 export const MLBNewsPrioritySchema = z.union([
-    z.literal(1).describe("Biggest News"),
-    z.literal(2).describe("Top Players"),
-    z.literal(3).describe("Regular News"),
-    z.literal(4).describe("Minor leagues"),
-    z.literal(5).describe("Non-fantasy"),
+    z.literal("1").describe("Biggest News"),
+    z.literal("2").describe("Top Players"),
+    z.literal("3").describe("Regular News"),
+    z.literal("4").describe("Minor leagues"),
+    z.literal("5").describe("Non-fantasy"),
 ]);
 
 export const MLBTeamCodeSchema = z.union([
