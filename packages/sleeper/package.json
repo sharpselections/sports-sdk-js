@@ -13,9 +13,11 @@
     "fantasy sports",
     "NFL",
     "NBA",
+    "EPL",
+    "LA LIGA",
     "sports data"
   ],
-  "version": "1.0.1",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "module": "dist/index.esm.js",
   "types": "./dist/index.d.ts",

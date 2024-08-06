@@ -1,24 +1,22 @@
-import {SleeperClient} from "../src";
-import {allApiTests, Sport} from "@sports-sdk/core";
+import {SleeperClient, SleeperClientSportsList} from "../src";
+import {allApiTests} from "@sports-sdk/core";
+
 const nock = require("nock");
 
 describe("Sleeper client live tests", () => {
-    const client = new SleeperClient();
-    const nockEndpoint = nock("https://api.sleeper.app/v1");
-    for (const sport of [Sport.NBA, Sport.NFL]) {
+    for (let sport of SleeperClientSportsList) {
+        const client = new SleeperClient(sport);
+        const nockEndpoint = nock("https://api.sleeper.app/v1");
         describe(sport, () => {
-            const params = {
-                sport: sport
-            }
             // TODO add in personal league info for more complete integration tests
-            allApiTests<SleeperClient>({
+            allApiTests<SleeperClient<typeof sport>>({
                 client,
                 nockEndpoint,
                 testCases: [
                     {
-                        method: "stateLookup" as keyof SleeperClient,
+                        method: "stateLookup" as keyof SleeperClient<typeof sport>,
                     },
-                ].map(({method}) => ({method, params, liveTests: {passes: true}}))
+                ].map(({method}) => ({method, liveTests: {passes: true}}))
             })
         })
     }
