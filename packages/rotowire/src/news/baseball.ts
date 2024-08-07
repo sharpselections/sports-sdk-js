@@ -305,10 +305,10 @@ export const MLBNewsResponseSchema = BaseNewsResponseSchema.extend({
 export type MLBNewsResponse = z.infer<typeof MLBNewsResponseSchema>;
 
 export const MLBInjuriesResponseSchema = z.object({
-    Players: z.array(z.union([MLBInjurySchema, MLBPlayerSchema.omit({Link: true, LeagueLevel: true}).extend({
+    Players: z.array(MLBPlayerSchema.omit({Link: true, LeagueLevel: true}).extend({
         Team: MLBTeamSchema.omit({Name: true, Nickname: true}),
         OnDisabledList: z.boolean().describe("1=Yes, 0= No")
-    })]))
+    }))
 });
 
 export type MLBInjuriesResponse = z.infer<typeof MLBInjuriesResponseSchema>;
