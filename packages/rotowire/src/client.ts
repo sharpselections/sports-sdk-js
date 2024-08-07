@@ -1,6 +1,6 @@
 import {Sport, SportsSdkClient} from "@sports-sdk/core";
 import {InjuriesResponse, LineupResponse, LineupsParams, NewsResponse} from "./types.ts";
-import { NewsParameters } from "./news/common.ts";
+import {NewsParameters} from "./news/common.ts";
 
 type RequestParams = {
     [key: string]: any
@@ -58,7 +58,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
      * Retrieves news for the selected sport.
      * @supports ALL
      */
-    public async getNews<T extends NewsResponse<S>>(params?: NewsParameters): Promise<T> {
+    public async getNews<T extends NewsResponse<S> = NewsResponse<S>>(params?: NewsParameters): Promise<T> {
         return this.request<T>({
             apiPath: "/News.php",
             additionalParams: params
@@ -69,7 +69,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
      * Retrieves injuries for the selected sport.
      * @supports ALL
      */
-    public async getInjuries<T extends InjuriesResponse<S>>(): Promise<T> {
+    public async getInjuries<T extends InjuriesResponse<S> = InjuriesResponse<S>>(): Promise<T> {
         return this.request<T>({
             apiPath: "/Injuries.php",
         });
@@ -79,7 +79,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
      * Retrieves lineups for the selected sport.
      * @supports NBA, MLB, EPL
      */
-    public async getLineups<T extends LineupResponse<S>>(params?: LineupsParams<S>): Promise<T> {
+    public async getLineups<T extends LineupResponse<S> = LineupResponse<S>>(params?: LineupsParams<S>): Promise<T> {
         if (this.sport !== Sport.NBA && this.sport !== Sport.MLB && this.sport !== Sport.EPL) {
             throw new Error("Only NBA, MLB, & EPL are supported!");
         }
