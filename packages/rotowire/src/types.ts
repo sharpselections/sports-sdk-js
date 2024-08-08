@@ -7,6 +7,7 @@ import {NHLInjuriesResponse, NHLNewsResponse} from "./news/hockey.ts";
 import {MLBLineupsParameters, MLBLineupsResponse} from "./lineups/baseball.ts";
 import {SoccerLineupsParameters, SoccerLineupsResponse} from "./lineups/soccer.ts";
 import {NBALineupsParameters, NBALineupsResponse} from "./lineups/basketball.ts";
+import {PlayersFreeAgentsTeams, PlayersPlayer, PlayersTeam, PlayersTeamDetailed} from "./players";
 
 export type NewsResponse<T extends Sport> =
     T extends Sport.MLB ? MLBNewsResponse :
@@ -37,3 +38,8 @@ export type LineupResponse<T extends Sport> =
         T extends Sport.EPL ? SoccerLineupsResponse :
             T extends Sport.NBA ? NBALineupsResponse :
                 never;
+
+export type PlayersResponse<T extends Sport> =
+    T extends Sport.NCAAF ? Array<PlayersPlayer> :
+        T extends Sport.EPL ? PlayersFreeAgentsTeams<PlayersPlayer, PlayersTeam<PlayersPlayer>>:
+            PlayersFreeAgentsTeams<PlayersPlayer, PlayersTeamDetailed<PlayersPlayer>>;

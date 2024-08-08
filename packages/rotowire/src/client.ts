@@ -1,5 +1,5 @@
 import {Sport, SportsSdkClient} from "@sports-sdk/core";
-import {InjuriesResponse, LineupResponse, LineupsParams, NewsResponse} from "./types.ts";
+import {InjuriesResponse, LineupResponse, LineupsParams, NewsResponse, PlayersResponse} from "./types.ts";
 import {NewsParameters} from "./news/common.ts";
 
 type RequestParams = {
@@ -52,6 +52,16 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
             throw new Error(`Failed to get a valid response: status code ${response.status}, response body ${response.data}`);
         }
         return response.data as T;
+    }
+
+    /**
+     * Retrieves players for the selected sport. The typing of the response is intentionally sparse as this endpoint is primarily useful for retrieving RW player ids.
+     * @supports ALL
+     */
+    public async getPlayers<T extends PlayersResponse<S> = PlayersResponse<S>>(): Promise<T> {
+        return this.request<T>({
+            apiPath: "/Players.php",
+        });
     }
 
     /**

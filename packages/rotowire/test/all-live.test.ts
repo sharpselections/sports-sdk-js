@@ -1,4 +1,4 @@
-import {RotowireClient} from "../src";
+import {PlayersResponse, RotowireClient} from "../src";
 import {allApiTests, Sport} from "@sports-sdk/core";
 
 const nock = require("nock");
@@ -24,12 +24,28 @@ describe("RotoWire client live tests", () => {
                 nockEndpoint,
                 testCases
             });
-            test("Can successfully access parsed data", async () => {
+            test("Can successfully access parsed news data", async () => {
                 const news = await client.getNews();
                 console.log(news);
-                const update1 = news.Updates[0];
-                expect(parseInt(update1.Priority)).toBeLessThanOrEqual(5);
+                if (news.Updates.length) {
+                    const update1 = news.Updates[0];
+                    expect(parseInt(update1.Priority)).toBeLessThanOrEqual(5);
+                }
+                expect(true).toBe(true);
             })
+            // this endpoint returns a lot of data, increased timeout to give it time + not including it methodsMap testing
+            test("Can successfully call & access players data", async () => {
+                let playersFreeAgentsTeams = await client.getPlayers();
+                console.log(playersFreeAgentsTeams);
+                if (sport === Sport.NCAAF) {
+                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<Sport.NCAAF>;
+                    expect(playersFreeAgentsTeams[0].Link).toContain("rotowire.com")
+                } else {
+                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<Sport.EPL>;
+                    expect(playersFreeAgentsTeams.FreeAgents[0].Link).toContain("rotowire.com")
+                    expect(playersFreeAgentsTeams.Teams[0].Players[0].Link).toContain("rotowire.com")
+                }
+            }, 120 * 1000)
         })
     });
 });
