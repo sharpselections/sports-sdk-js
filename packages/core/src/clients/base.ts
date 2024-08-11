@@ -2,7 +2,7 @@ import axios, {AxiosInstance} from "axios";
 
 export class SportsSdkClient {
     protected readonly endpoint: string;
-    protected session: AxiosInstance;
+    public session: AxiosInstance;
 
     constructor(endpoint: string) {
         this.endpoint = endpoint;
