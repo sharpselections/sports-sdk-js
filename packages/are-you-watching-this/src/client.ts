@@ -55,7 +55,6 @@ export class RUWTClient extends SportsSdkClient {
      * @param additionalParams - Additional query parameters for the request.
      * @param parser - Optional ZodObject to parse the response data before returning it as T
      * @returns The response data from the API.
-     * @throws Will throw an error if the request fails.
      */
     protected async request<T>({apiPath, additionalParams = {}, parser}: {
         additionalParams?: RequestParams,
@@ -75,9 +74,6 @@ export class RUWTClient extends SportsSdkClient {
         }, new URLSearchParams({apiKey: this.apiKey}));
         const response = await this.session.get(apiPath, {params});
 
-        if (response.status !== 200) {
-            throw new Error(`Failed to get a valid response: status code ${response.status}, response body ${response.data}`);
-        }
         const result = parser?.parse(response.data) ?? response.data;
         return result as T;
     }
