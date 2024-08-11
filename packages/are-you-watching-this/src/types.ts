@@ -35,6 +35,8 @@ export interface GamesParameters {
 }
 
 export interface Game {
+    assets?: Array<GameAsset>;
+    attributes: Array<GameAttribute>;
     competition?: string;
     date: number
     gameID: number;
@@ -50,7 +52,11 @@ export interface Game {
     rationale?: string;
     round?: string
     seasonSection?: string;
-    sport: string
+    sport: string;
+    statistics?: {
+        team1?: GameStatistics;
+        team2?: GameStatistics;
+    };
     team1City?: string;
     team1Color?: string;
     team1ID?: number
@@ -65,6 +71,40 @@ export interface Game {
     team2Score?: number
     time: number
     timeLeft?: string
+}
+
+export interface GameAsset {
+    assetID: number;
+    date: number;
+    description?: string;
+    duration?: number;
+    gameID: number;
+    pointsLevel: string;
+    source: string;
+    sport: string;
+    tags?: Array<string>;
+    title: string;
+    type: string;
+    url: string;
+}
+
+export interface GameAttribute {
+    data: Array<any>;
+    format: string;
+    name: string;
+}
+
+export interface GameStatistics {
+    // TODO see if we can get the enums that can be returned here
+    [key: string]: Array<GamePlayerStatistic>;
+}
+
+export interface GamePlayerStatistic {
+    firstName: string;
+    lastName: string;
+    playerID: number;
+    position: string;
+    value: number;
 }
 
 export interface GameOddsParameters {
