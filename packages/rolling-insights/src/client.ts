@@ -6,15 +6,16 @@ import {
     SportTeamStatsMap,
 } from "./types";
 import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import axios from "axios";
 
 /**
  * Type for additional parameters used in API requests.
  */
 type AdditionalParams = {
-    team_id?: string;
+    [key: string]: any;
     game_id?: string;
     player_id?: string;
-    [key: string]: any;
+    team_id?: string;
 };
 
 export class RollingInsightsClient extends SportsSdkClient {
@@ -26,7 +27,18 @@ export class RollingInsightsClient extends SportsSdkClient {
      * @throws Will throw an error if the RSC token is not provided or found in the environment variables.
      */
     constructor(rscToken?: string) {
-        super("http://rest.datafeeds.rolling-insights.com/api/v1");
+        const endpoint = "http://rest.datafeeds.rolling-insights.com/api/v1";
+        const session = axios.create({
+            baseURL: endpoint,
+            headers: {
+                "Content-Type": "application/json",
+            },
+			validateStatus: function(status) {
+                // Rolling Insights returns 304 fairly often, need to be able to handle it
+				return status < 300 || status == 304;
+			},
+        });
+        super(endpoint, session);
         const token = rscToken || process.env.DATA_FEEDS_RSC_TOKEN;
 
         if (!token) {
@@ -141,9 +153,9 @@ export class RollingInsightsClient extends SportsSdkClient {
      */
     public async getDailySchedule({date = "now", sport, teamId, gameId}: {
         date?: string,
-        sport: Sport,
-        teamId?: string,
         gameId?: string,
+        sport: Sport,
+        teamId?: string
     }): Promise<Array<SportScheduleMap[typeof sport]> | undefined> {
         const apiPath = this.buildApiPath("/schedule", date, sport);
         const additionalParams = this.buildAdditionalParams(teamId, gameId);
@@ -158,9 +170,9 @@ export class RollingInsightsClient extends SportsSdkClient {
      */
     public async getLive({date = "now", sport, teamId, gameId}: {
         date?: string,
+        gameId?: string,
         sport: Sport,
-        teamId?: string,
-        gameId?: string
+        teamId?: string
     }): Promise<any> {
         const apiPath = this.buildApiPath("/live", date, sport);
         const additionalParams = this.buildAdditionalParams(teamId, gameId);
@@ -225,9 +237,9 @@ export class RollingInsightsClient extends SportsSdkClient {
      */
     public async getPlayerStats({date, sport, teamId, playerId}: {
         date?: string,
-        sport: Sport,
-        teamId?: string,
         playerId?: string,
+        sport: Sport,
+        teamId?: string
     }): Promise<SportPlayerStatsMap[typeof sport] | Array<SportPlayerStatsMap[typeof sport]> | undefined> {
         const apiPath = this.buildApiPath("/player-stats", date, sport);
         const additionalParams = this.buildAdditionalParams(teamId, undefined, playerId);

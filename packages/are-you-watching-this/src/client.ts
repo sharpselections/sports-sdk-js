@@ -15,6 +15,7 @@ import {
     PlayerStats, SportsResult, StandingsParameters, StandingsResult, TeamsParameters, Team
 } from "./types.ts";
 import {ZodObject} from "zod";
+import axios from "axios";
 
 export class RUWTClient extends SportsSdkClient {
     protected readonly apiKey: string;
@@ -32,7 +33,18 @@ export class RUWTClient extends SportsSdkClient {
         if (!token) {
             throw new Error("RUWT API key is required. Provide it as a parameter or set the environment variable RUWT_API_KEY.");
         }
-        super(`https://${site ? `${site}.api.` : ""}areyouwatchingthis.com/api`);
+        const endpoint = `https://${site ? `${site}.api.` : ""}areyouwatchingthis.com/api`;
+        const session = axios.create({
+            baseURL: endpoint,
+            headers: {
+                "Content-Type": "application/json",
+            },
+			validateStatus: function(status) {
+                // Client should accept and handle other status codes as they have meaning in the RUWT API
+				return status < 500;
+			},
+        })
+        super(endpoint, session);
 
         this.apiKey = token;
     }
