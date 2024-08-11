@@ -63,7 +63,6 @@ describe("Are You Watching This?! client tests", () => {
                         "results",
                         "meta",
                         "players",
-                        "games",
                     ],
                 },
                 nockTests: {

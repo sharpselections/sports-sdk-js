@@ -1,3 +1,5 @@
+import {RUWTLeagueCode, RUWTSport} from "./enums.ts";
+
 export interface RequestParams {
     [key: string]: any;
 }
@@ -29,7 +31,7 @@ export interface GamesParameters {
     // The ID of a cable or satellite provider
     providerID?: string;
     // The abbreviation for the sports; such as mlb; nfl; or ncaab.
-    sports?: Array<string>;
+    sports?: Array<RUWTSport>;
     // The ID of a team
     teamID?: string;
 }
@@ -44,7 +46,7 @@ export interface Game {
     highPoints: number;
     insights?: Array<string>;
     label?: string;
-    leagueCode: string;
+    leagueCode: RUWTLeagueCode;
     location?: string;
     points: number;
     pointsLevel: string;
@@ -52,7 +54,7 @@ export interface Game {
     rationale?: string;
     round?: string
     seasonSection?: string;
-    sport: string;
+    sport: RUWTSport;
     statistics?: {
         team1?: GameStatistics;
         team2?: GameStatistics;
@@ -81,7 +83,7 @@ export interface GameAsset {
     gameID: number;
     pointsLevel: string;
     source: string;
-    sport: string;
+    sport: RUWTSport;
     tags?: Array<string>;
     title: string;
     type: string;
@@ -117,7 +119,7 @@ export interface GameOddsParameters {
     // Free-text query like 'yankees' or 'nhl/rangers'.
     q?: string;
     // The abbreviation for the sport; such as mlb; nfl; or ncaab.
-    sport?: string;
+    sport?: RUWTSport;
     // The ID of a team
     teamID?: string;
 }
@@ -127,14 +129,14 @@ export interface GameOddsResult {
     gameID: number;
     headline: string;
     highPoints: number;
-    leagueCode: string;
+    leagueCode: RUWTLeagueCode;
     location: string;
     odds: Array<GameOdds>;
     points: number;
     pointsLevel: string;
     rotationNumber1?: number;
     rotationNumber2?: number;
-    sport: string;
+    sport: RUWTSport;
     team1City: string;
     team1Color: string;
     team1ID: number;
@@ -168,9 +170,9 @@ export interface GameOdds {
 export interface OddsSplitsParameters {
     // The ID of a game
     gameID?: string;
-    leagueCode?: string;
+    leagueCode?: RUWTLeagueCode;
     // The abbreviation for the sport; such as mlb; nfl; or ncaab.
-    sport?: string;
+    sport?: RUWTSport;
     // The ID of a team
     teamID?: string;
 }
@@ -178,7 +180,7 @@ export interface OddsSplitsParameters {
 export interface SideOddsParameters {
     // The ID of a game
     gameID?: string;
-    leagueCode?: string;
+    leagueCode?: RUWTLeagueCode;
     playerID?: string;
     // Free-text query like 'yankees' or 'nhl/rangers'.
     q?: string;
@@ -201,7 +203,7 @@ export interface Player {
     number: string;
     playerID: number;
     position: string;
-    sport: string
+    sport: RUWTSport
     teamID?: number;
     weight: number
 }
@@ -261,7 +263,7 @@ export interface SportsResult {
 }
 
 export interface SportsLeague {
-    code: string
+    code: RUWTLeagueCode
     endDate?: number
     name: string;
     showGamesByWeek: boolean;
@@ -269,15 +271,15 @@ export interface SportsLeague {
 }
 
 export interface StandingsParameters {
-    leagueCode?: string;
+    leagueCode?: RUWTLeagueCode;
     // The abbreviation for the sport; such as mlb; nfl; or ncaab.
-    sport?: string;
+    sport?: RUWTSport;
 }
 
 export interface StandingsResult {
     conference: string;
     division: string;
-    leagueCode: string;
+    leagueCode: RUWTLeagueCode;
     teams: Array<StandingsTeam>;
 }
 
@@ -287,7 +289,7 @@ export interface StandingsTeam {
     losses: number;
     name: string;
     played: number;
-    sport: string;
+    sport: RUWTSport;
     streak: number;
     teamID: number;
     wins: number;
@@ -296,7 +298,7 @@ export interface StandingsTeam {
 
 export interface TeamsParameters {
     // The abbreviation for the sport; such as mlb; nfl; or ncaab.
-    sport?: string;
+    sport?: RUWTSport;
     // The ID of a team
     teamID?: number;
 }
@@ -306,10 +308,10 @@ export interface Team {
     color?: string;
     form?: string;
     initials: string;
-    leagueCode: string;
+    leagueCode: RUWTLeagueCode;
     losses?: number;
     name?: string;
-    sport: string;
+    sport: RUWTSport;
     teamID: number;
     wins?: number;
 }
