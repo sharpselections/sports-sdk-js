@@ -362,14 +362,9 @@ export enum RUWTLeagueCode {
     CRTWC = "CRTWC",
 
     /**
-     * General
+     * Cycling
      */
-    GEN = "GEN",
-
-    /**
-     * European Golf Association
-     */
-    EGA = "EGA",
+    CYC = "CYC",
 
     /**
      * Korn Ferry Tour
@@ -377,9 +372,14 @@ export enum RUWTLeagueCode {
     DGA = "DGA",
 
     /**
-     * ECHL
+     * European Golf Association
      */
-    HKE = "HKE",
+    EGA = "EGA",
+
+    /**
+     * Overwatch League
+     */
+    ESOWL = "ESOWL",
 
     /**
      * Arena Football League
@@ -402,14 +402,14 @@ export enum RUWTLeagueCode {
     FBD = "FBD",
 
     /**
-     * Super League
+     * National Football League
      */
-    RLEU = "RLEU",
+    FBP = "FBP",
 
     /**
-     * MotoGP
+     * UFL
      */
-    RACGP = "RACGP",
+    FBU = "FBU",
 
     /**
      * NFL Europe
@@ -417,29 +417,29 @@ export enum RUWTLeagueCode {
     FBW = "FBW",
 
     /**
-     * LLB
+     * General
      */
-    LLB = "LLB",
+    GEN = "GEN",
 
     /**
-     * Ladies Professional Golfers Association
+     * American Hockey League
      */
-    LGA = "LGA",
+    HKA = "HKA",
 
     /**
-     * Senior Professional Golfers Association
+     * Central Hockey League
      */
-    SGA = "SGA",
+    HKC = "HKC",
 
     /**
-     * IndyCar
+     * ECHL
      */
-    RACIN = "RACIN",
+    HKE = "HKE",
 
     /**
-     * NASCAR
+     * College Hockey
      */
-    RACNS = "RACNS",
+    HKH = "HKH",
 
     /**
      * National Hockey League
@@ -452,19 +452,19 @@ export enum RUWTLeagueCode {
     LCN = "LCN",
 
     /**
+     * Ladies Professional Golfers Association
+     */
+    LGA = "LGA",
+
+    /**
+     * LLB
+     */
+    LLB = "LLB",
+
+    /**
      * Mixed Martial Arts
      */
     MMA = "MMA",
-
-    /**
-     * Cycling
-     */
-    CYC = "CYC",
-
-    /**
-     * College Hockey
-     */
-    HKH = "HKH",
 
     /**
      * Internationals
@@ -497,9 +497,9 @@ export enum RUWTLeagueCode {
     OLYSW = "OLYSW",
 
     /**
-     * Formula 1
+     * Professional Bowlers Assn
      */
-    RACF1 = "RACF1",
+    PBA = "PBA",
 
     /**
      * Professional Golfers Association
@@ -512,24 +512,24 @@ export enum RUWTLeagueCode {
     POK = "POK",
 
     /**
-     * Rodeo
+     * Formula 1
      */
-    ROD = "ROD",
+    RACF1 = "RACF1",
 
     /**
-     * Internationals
+     * MotoGP
      */
-    RUINT = "RUINT",
+    RACGP = "RACGP",
 
     /**
-     * AFC Asian Cup
+     * IndyCar
      */
-    SOASI = "SOASI",
+    RACIN = "RACIN",
 
     /**
-     * Leagues Cup
+     * NASCAR
      */
-    SONLC = "SONLC",
+    RACNS = "RACNS",
 
     /**
      * V8 Supercars
@@ -552,9 +552,9 @@ export enum RUWTLeagueCode {
     RLAU9 = "RLAU9",
 
     /**
-     * Rugby Championship
+     * Super League
      */
-    RUTRC = "RUTRC",
+    RLEU = "RLEU",
 
     /**
      * Internationals
@@ -572,9 +572,9 @@ export enum RUWTLeagueCode {
     RLWC = "RLWC",
 
     /**
-     * Scottish Premiership
+     * Rodeo
      */
-    SOSC = "SOSC",
+    ROD = "ROD",
 
     /**
      * 6 Nations
@@ -587,9 +587,9 @@ export enum RUWTLeagueCode {
     RU7 = "RU7",
 
     /**
-     * Club World Cup
+     * Internationals
      */
-    SCC = "SCC",
+    RUINT = "RUINT",
 
     /**
      * Super Rugby
@@ -597,9 +597,9 @@ export enum RUWTLeagueCode {
     RUSR = "RUSR",
 
     /**
-     * American Hockey League
+     * Rugby Championship
      */
-    HKA = "HKA",
+    RUTRC = "RUTRC",
 
     /**
      * Rugby World Cup
@@ -617,9 +617,9 @@ export enum RUWTLeagueCode {
     SCB = "SCB",
 
     /**
-     * EFL Cup
+     * Club World Cup
      */
-    SOEFL = "SOEFL",
+    SCC = "SCC",
 
     /**
      * CONCACAF Champions League
@@ -632,24 +632,24 @@ export enum RUWTLeagueCode {
     SCU = "SCU",
 
     /**
-     * Gold Cup
+     * Senior Professional Golfers Association
      */
-    SONCC = "SONCC",
+    SGA = "SGA",
 
     /**
-     * League One
+     * UEFA European Championship
      */
-    SOEL1 = "SOEL1",
+    SOA = "SOA",
 
     /**
-     * International Friendlies
+     * UEFA European Championship Qualifying
      */
-    SOINW = "SOINW",
+    SOAQ = "SOAQ",
 
     /**
-     * La Liga
+     * AFC Asian Cup
      */
-    SOS = "SOS",
+    SOASI = "SOASI",
 
     /**
      * A-League
@@ -657,9 +657,9 @@ export enum RUWTLeagueCode {
     SOAUA = "SOAUA",
 
     /**
-     * Mexican Soccer
+     * W-League
      */
-    SOX = "SOX",
+    SOAUW = "SOAUW",
 
     /**
      * Copa Soccer
@@ -677,14 +677,14 @@ export enum RUWTLeagueCode {
     SOEFA = "SOEFA",
 
     /**
-     * National Football League
+     * EFL Cup
      */
-    FBP = "FBP",
+    SOEFL = "SOEFL",
 
     /**
-     * Major League Soccer
+     * League One
      */
-    SOM = "SOM",
+    SOEL1 = "SOEL1",
 
     /**
      * League Championship
@@ -727,29 +727,29 @@ export enum RUWTLeagueCode {
     SOINT = "SOINT",
 
     /**
+     * International Friendlies
+     */
+    SOINW = "SOINW",
+
+    /**
+     * Major League Soccer
+     */
+    SOM = "SOM",
+
+    /**
      * National Women's Soccer League
      */
     SOMW = "SOMW",
 
     /**
-     * UEFA European Championship
+     * Gold Cup
      */
-    SOA = "SOA",
+    SONCC = "SONCC",
 
     /**
-     * UEFA European Championship Qualifying
+     * Leagues Cup
      */
-    SOAQ = "SOAQ",
-
-    /**
-     * W-League
-     */
-    SOAUW = "SOAUW",
-
-    /**
-     * Women's World Cup
-     */
-    SOWW = "SOWW",
+    SONLC = "SONLC",
 
     /**
      * Argentina Soccer
@@ -757,9 +757,9 @@ export enum RUWTLeagueCode {
     SOR = "SOR",
 
     /**
-     * Tennis
+     * La Liga
      */
-    TEN = "TEN",
+    SOS = "SOS",
 
     /**
      * La Liga 2
@@ -767,9 +767,9 @@ export enum RUWTLeagueCode {
     SOS2 = "SOS2",
 
     /**
-     * UFL
+     * Scottish Premiership
      */
-    FBU = "FBU",
+    SOSC = "SOSC",
 
     /**
      * World Cup
@@ -777,17 +777,17 @@ export enum RUWTLeagueCode {
     SOW = "SOW",
 
     /**
-     * Central Hockey League
+     * Women's World Cup
      */
-    HKC = "HKC",
+    SOWW = "SOWW",
 
     /**
-     * Professional Bowlers Assn
+     * Mexican Soccer
      */
-    PBA = "PBA",
+    SOX = "SOX",
 
     /**
-     * Overwatch League
+     * Tennis
      */
-    ESOWL = "ESOWL",
+    TEN = "TEN"
 }
