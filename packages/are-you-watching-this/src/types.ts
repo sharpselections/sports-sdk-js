@@ -40,7 +40,7 @@ export interface Game {
     assets?: Array<GameAsset>;
     attributes: Array<GameAttribute>;
     competition?: string;
-    date: number
+    date: number;
     gameID: number;
     headline?: string;
     highPoints: number;
@@ -50,29 +50,33 @@ export interface Game {
     location?: string;
     points: number;
     pointsLevel: string;
-    programIDs?: Array<string>
+    programIDs?: Array<string>;
     rationale?: string;
-    round?: string
+    rotationNumber1?: number;
+    rotationNumber2?: number;
+    round?: string;
     seasonSection?: string;
     sport: RUWTSport;
     statistics?: {
         team1?: GameStatistics;
         team2?: GameStatistics;
-    };
+    }
     team1City?: string;
     team1Color?: string;
-    team1ID?: number
-    team1Initials?: string
+    team1ID?: number;
+    team1Initials?: string;
     team1Name?: string;
+    team1Nickname?: string;
     team1Score?: number;
     team2City?: string;
     team2Color?: string;
     team2ID?: number;
     team2Initials?: string;
     team2Name?: string;
-    team2Score?: number
-    time: number
-    timeLeft?: string
+    team2Nickname?: string;
+    team2Score?: number;
+    time?: number;
+    timeLeft?: string;
 }
 
 export interface GameAsset {
@@ -124,39 +128,15 @@ export interface GameOddsParameters {
     teamID?: string;
 }
 
-export interface GameOddsResult {
-    date: number;
-    gameID: number;
-    headline: string;
-    highPoints: number;
-    leagueCode: RUWTLeagueCode;
-    location: string;
+export interface GameOddsResult extends Game {
     odds: Array<GameOdds>;
-    points: number;
-    pointsLevel: string;
-    rotationNumber1?: number;
-    rotationNumber2?: number;
-    sport: RUWTSport;
-    team1City: string;
-    team1Color: string;
-    team1ID: number;
-    team1Initials: string;
-    team1Name: string;
-    team1Score?: number;
-    team2City: string;
-    team2Color: string;
-    team2ID: number;
-    team2Initials: string;
-    team2Name: string;
-    team2Score?: number;
-    time?: number;
-    timeLeft?: string
 }
 
 export interface GameOdds {
-    date: number
+    date: number;
     moneyLine1?: number;
     moneyLine2?: number;
+    moneyLineTie?: number;
     overUnder?: number;
     overUnderLineOver?: number;
     overUnderLineUnder?: number;
@@ -164,7 +144,7 @@ export interface GameOdds {
     spread?: number;
     spreadLine1?: number;
     spreadLine2?: number;
-    url?: string
+    url?: string;
 }
 
 export interface OddsSplitsParameters {
