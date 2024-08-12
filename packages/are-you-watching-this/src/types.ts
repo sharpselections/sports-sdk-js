@@ -157,6 +157,28 @@ export interface OddsSplitsParameters {
     teamID?: string;
 }
 
+export interface OddsSplitsResult extends Game {
+    splits: Array<OddsSplits>
+}
+
+/**
+ * Handle = Money wagered
+ */
+export interface OddsSplits {
+    moneyLine1BetPercentage: number,
+    moneyLine1HandlePercentage: number,
+    moneyLine2BetPercentage: number,
+    moneyLine2HandlePercentage: number,
+    overUnderLineOverBetPercentage: number,
+    overUnderLineOverHandlePercentage: number,
+    overUnderLineUnderBetPercentage: number,
+    overUnderLineUnderHandlePercentage: number
+    spreadLine1BetPercentage: number,
+    spreadLine1HandlePercentage: number,
+    spreadLine2BetPercentage: number,
+    spreadLine2HandlePercentage: number
+}
+
 export interface SideOddsParameters {
     // The ID of a game
     gameID?: string;
@@ -200,12 +222,24 @@ export interface SideOdds {
     cutoffDate?: number;
     date: number
     gameID?: number;
-    playerID: number;
+    playerID?: number;
+    /**
+     * Shown by itself for a one-option outright bet
+     */
     price?: number;
+    /**
+     * Yes/Over
+     */
     price1?: number;
+    /**
+     * No/Under
+     */
     price2?: number;
     provider: string;
     url?: string;
+    /**
+     * Over/Under value
+     */
     value?: number
 }
 

@@ -12,7 +12,7 @@ import {
     PlayersParameters,
     Player,
     PlayerStatisticsParameters,
-    PlayerStats, SportsResult, StandingsParameters, StandingsResult, TeamsParameters, Team
+    PlayerStats, SportsResult, StandingsParameters, StandingsResult, TeamsParameters, Team, OddsSplitsResult
 } from "./types.ts";
 import {ZodObject} from "zod";
 import axios from "axios";
@@ -109,8 +109,8 @@ export class RUWTClient extends SportsSdkClient {
         });
     }
 
-    public async getOddsSplits(parameters?: OddsSplitsParameters): Promise<RUWTResponse<any>> {
-        return await this.request<RUWTResponse<any>>({
+    public async getOddsSplits(parameters?: OddsSplitsParameters): Promise<RUWTResponse<OddsSplitsResult>> {
+        return await this.request<RUWTResponse<OddsSplitsResult>>({
             apiPath: "/odds-splits.json",
             additionalParams: parameters,
         });

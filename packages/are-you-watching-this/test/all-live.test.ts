@@ -2,7 +2,7 @@ import {RUWTClient} from "../src";
 import {allApiTests} from "@sports-sdk/core";
 import {
     GAMES_RESPONSE,
-    ODDS_RESPONSE,
+    ODDS_RESPONSE, ODDS_SPLITS_RESPONSE,
     PLAYER_STATS_RESPONSE,
     PLAYERS_RESPONSE,
     SIDE_ODDS_RESPONSE,
@@ -125,7 +125,7 @@ describe("Are You Watching This?! client tests", () => {
             {
                 method: "getStandings",
                 params: {
-                  sport: "mlb"
+                    sport: "mlb"
                 },
                 liveTests: {
                     passes: true,
@@ -143,7 +143,7 @@ describe("Are You Watching This?! client tests", () => {
             {
                 method: "getTeams",
                 params: {
-                  sport: "nba"
+                    sport: "nba"
                 },
                 liveTests: {
                     passes: true,
@@ -156,6 +156,24 @@ describe("Are You Watching This?! client tests", () => {
                     path: "/teams.json",
                     query: true,
                     expectedResponse: TEAMS_RESPONSE
+                }
+            },
+            {
+                method: "getOddsSplits",
+                params: {
+                    sport: "mlb"
+                },
+                liveTests: {
+                    passes: true,
+                    properties: [
+                        "results",
+                        "meta",
+                    ],
+                },
+                nockTests: {
+                    path: "/odds-splits.json",
+                    query: true,
+                    expectedResponse: ODDS_SPLITS_RESPONSE
                 }
             },
         ]
