@@ -231,6 +231,7 @@ export interface SideOdds {
      */
     price2?: number;
     provider: RUWTOddsProvider;
+    teamID?: number;
     url?: string;
     /**
      * Over/Under value
