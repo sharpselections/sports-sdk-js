@@ -1,0 +1,53 @@
+{
+  "name": "@sports-sdk/fantasypros",
+  "description": "A package for interacting with the FantasyPros API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharpselections/sports-sdk-js.git",
+    "directory": "packages/fantasypros"
+  },
+  "license": "MIT",
+  "keywords": [
+    "fantasypros",
+    "fantasy",
+    "sports",
+    "fantasy sports",
+    "NFL",
+    "NBA",
+    "NHL",
+    "MLB"
+  ],
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@sports-sdk/core": "workspace:*",
+    "axios": "^1.7.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@sports-sdk/eslint-config": "workspace:*",
+    "@sports-sdk/jest": "workspace:*",
+    "@sports-sdk/tsconfig": "workspace:*",
+    "@types/node": "^20.14.10",
+    "@types/jest": "^29.5.12",
+    "dotenv": "^16.4.5",
+    "jest": "^29.7.0",
+    "nock": "^13.5.4",
+    "ts-jest": "^29.1.5",
+    "tsup": "^8.1.0",
+    "typescript": "^5.3.3"
+  }
+}

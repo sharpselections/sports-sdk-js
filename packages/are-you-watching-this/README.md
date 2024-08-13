@@ -19,7 +19,7 @@ npm i @sports-sdk/ruwt
 | Injuries            | :heavy_multiplication_x: | :heavy_multiplication_x: |
 | Links               | :heavy_multiplication_x: | :heavy_multiplication_x: |
 | Odds (GameOdds)     | :heavy_check_mark:       | :heavy_check_mark:       |
-| Odds Splits         | :heavy_check_mark:       | :heavy_multiplication_x: |
+| Odds Splits         | :heavy_check_mark:       | :heavy_check_mark:       |
 | Odds (SideOdds)     | :heavy_check_mark:       | :heavy_check_mark:       |
 | Olympic Medal Count | :heavy_multiplication_x: | :heavy_multiplication_x: |
 | Players             | :heavy_check_mark:       | :heavy_check_mark:       |
