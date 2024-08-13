@@ -11,6 +11,8 @@ import {
 
 const nock = require("nock");
 
+const devers = 64677;
+
 
 describe("Are You Watching This?! client tests", () => {
     const client = new RUWTClient();
@@ -74,7 +76,7 @@ describe("Are You Watching This?! client tests", () => {
             {
                 method: "getPlayers",
                 params: {
-                    playerID: 64677
+                    playerID: devers
                 },
                 liveTests: {
                     passes: true,
@@ -92,7 +94,7 @@ describe("Are You Watching This?! client tests", () => {
             {
                 method: "getPlayerStatistics",
                 params: {
-                    playerID: 64677
+                    playerID: devers
                 },
                 liveTests: {
                     passes: true,
@@ -177,5 +179,20 @@ describe("Are You Watching This?! client tests", () => {
                 }
             },
         ]
+    });
+    test("can access player stats", async () => {
+        const devers2023 = await client.getPlayerStatistics({
+            playerID: devers,
+            season: 2023
+        });
+        const stats = devers2023?.results?.[0]?.statistics;
+        expect(stats?.BASEBALL_BATTING_HOME_RUNS).toEqual(33);
+    });
+    test("can access game stats", async () => {
+        const superBowlLI = await client.getGames({
+            gameID: 370354
+        });
+        const team1Stats = superBowlLI?.results?.[0]?.statistics?.team1;
+        expect(team1Stats?.FOOTBALL_PASSING_TOUCHDOWNS?.[0].value).toEqual(2);
     });
 });

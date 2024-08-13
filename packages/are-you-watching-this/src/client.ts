@@ -39,10 +39,10 @@ export class RUWTClient extends SportsSdkClient {
             headers: {
                 "Content-Type": "application/json",
             },
-			validateStatus: function(status) {
+            validateStatus: function (status) {
                 // Client should accept and handle other status codes as they have meaning in the RUWT API
-				return status < 500;
-			},
+                return status < 500;
+            },
         })
         super(endpoint, session);
 
@@ -79,23 +79,18 @@ export class RUWTClient extends SportsSdkClient {
     }
 
     public async getGames(parameters?: GamesParameters): Promise<RUWTResponse<Game>> {
-        let additionalParams: RequestParams = {};
-        if (parameters) {
-            const {
-                dateRange,
-                providerCoordinates,
-                ...params
-            } = parameters;
-            additionalParams = {...params};
-            if (dateRange) {
-                additionalParams["startDate"] = dateRange[0];
-                additionalParams["endDate"] = dateRange[1];
-            }
-            if (providerCoordinates) {
-                additionalParams["providerLatitude"] = providerCoordinates[0];
-                additionalParams["providerLongitude"] = providerCoordinates[1];
-            }
-        }
+        const additionalParams: RequestParams = parameters ? {
+            ...parameters,
+            ...(parameters.dateRange && {
+                startDate: parameters.dateRange[0],
+                endDate: parameters.dateRange[1]
+            }),
+            ...(parameters.providerCoordinates && {
+                providerLatitude: parameters.providerCoordinates[0],
+                providerLongitude: parameters.providerCoordinates[1]
+            })
+        } : {};
+
         return await this.request<RUWTResponse<Game>>({
             apiPath: "/games.json",
             additionalParams,
@@ -137,7 +132,7 @@ export class RUWTClient extends SportsSdkClient {
         });
     }
 
-    public async getSports(): Promise<RUWTResponse<SportsResult>>{
+    public async getSports(): Promise<RUWTResponse<SportsResult>> {
         return await this.request<RUWTResponse<SportsResult>>({
             apiPath: "/sports.json",
         });
@@ -149,8 +144,8 @@ export class RUWTClient extends SportsSdkClient {
             additionalParams: parameters,
         })
     }
-    
-    public async getTeams(parameters: TeamsParameters): Promise<RUWTResponse<Team>>{
+
+    public async getTeams(parameters: TeamsParameters): Promise<RUWTResponse<Team>> {
         return await this.request<RUWTResponse<Team>>({
             apiPath: "/teams.json",
             additionalParams: parameters,
