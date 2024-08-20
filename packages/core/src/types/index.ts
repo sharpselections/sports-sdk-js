@@ -1,9 +1,13 @@
 export * from "./utils";
 export enum Sport {
-    NBA = "NBA",
-    NFL = "NFL",
-    MLB = "MLB",
     EPL = "EPL",
-    NHL = "NHL",
+    MLB = "MLB",
+    NBA = "NBA",
     NCAAF = "NCAAF",
+    NFL = "NFL",
+    NHL = "NHL"
+}
+
+export interface RequestParams {
+    [key: string]: any;
 }
