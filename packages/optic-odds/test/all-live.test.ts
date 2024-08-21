@@ -14,7 +14,7 @@ describe("OpticOdds client live tests", () => {
     const yankeesID = "121EBAED4535";
     for (let sport of Object.values(League)) {
         describe(sport, () => {
-            const opticLeague = OpticOddsClient.coreSportToOpticLeague(sport);
+            const opticLeague = OpticOddsClient.coreLeagueToOpticLeague(sport);
             describe("league specific", () => {
                 allApiTests<OpticOddsClient>({
                     client,

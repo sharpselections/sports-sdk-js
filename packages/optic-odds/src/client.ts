@@ -37,7 +37,7 @@ export class OpticOddsClient extends SportsSdkClient {
         this.apiKey = key;
     }
 
-    public static coreSportToOpticLeague(league: League){
+    public static coreLeagueToOpticLeague(league: League){
         if (league === League.EPL){
             return "england_-_premier_league";
         }
