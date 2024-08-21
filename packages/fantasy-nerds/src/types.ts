@@ -1,4 +1,4 @@
-import {Sport} from "@sports-sdk/core";
+import {League} from "@sports-sdk/core";
 import {
     NFLAuctionValuesResponse,
     NFLDraftProjectionsResponse,
@@ -36,9 +36,9 @@ export interface LineupsParams {
 }
 
 export interface AuctionValuesParams {
-    teams?: 8 | 10 | 12 | 14 | 16;
     budget?: number;
     format?: "std" | "ppr";
+    teams?: 8 | 10 | 12 | 14 | 16;
 }
 
 export interface FantasyLeadersParams {
@@ -52,45 +52,45 @@ export interface WeeklyProjectionsParams {
 }
 
 
-export type DraftProjections<T extends Sport> =
-    T extends Sport.NFL ? NFLDraftProjectionsResponse :
-        T extends Sport.NBA ? NBADraftProjectionsResponse :
-            T extends Sport.MLB ? MLBDraftProjectionsResponse :
+export type DraftProjections<T extends League> =
+    T extends League.NFL ? NFLDraftProjectionsResponse :
+        T extends League.NBA ? NBADraftProjectionsResponse :
+            T extends League.MLB ? MLBDraftProjectionsResponse :
                 never;
 
-export type DraftRankings<T extends Sport> =
-    T extends Sport.NFL ? NFLDraftRankingsResponse :
-        T extends Sport.NBA ? NBADraftRankingsResponse :
-            T extends Sport.MLB ? MLBDraftRankingsResponse :
+export type DraftRankings<T extends League> =
+    T extends League.NFL ? NFLDraftRankingsResponse :
+        T extends League.NBA ? NBADraftRankingsResponse :
+            T extends League.MLB ? MLBDraftRankingsResponse :
                 never;
 
-export type Schedule<T extends Sport> =
-    T extends Sport.NFL ? NFLScheduleResponse :
-        T extends Sport.NBA ? NBAScheduleResponse :
-            T extends Sport.MLB ? MLBScheduleResponse :
+export type Schedule<T extends League> =
+    T extends League.NFL ? NFLScheduleResponse :
+        T extends League.NBA ? NBAScheduleResponse :
+            T extends League.MLB ? MLBScheduleResponse :
                 never;
 
-export type Lineups<T extends Sport> =
-    T extends Sport.NBA ? NBALineupsResponse :
-        T extends Sport.MLB ? MLBLineupsResponse :
+export type Lineups<T extends League> =
+    T extends League.NBA ? NBALineupsResponse :
+        T extends League.MLB ? MLBLineupsResponse :
             never;
 
-export type PlayerRater<T extends Sport> =
-    T extends Sport.NBA ? NBAPlayerRaterResponse :
-        T extends Sport.MLB ? MLBPlayerRaterResponse :
+export type PlayerRater<T extends League> =
+    T extends League.NBA ? NBAPlayerRaterResponse :
+        T extends League.MLB ? MLBPlayerRaterResponse :
             never;
 
-export type AuctionValues<T extends Sport> =
-    T extends Sport.NFL ? NFLAuctionValuesResponse :
-        T extends Sport.MLB ? MLBAuctionValuesResponse :
+export type AuctionValues<T extends League> =
+    T extends League.NFL ? NFLAuctionValuesResponse :
+        T extends League.MLB ? MLBAuctionValuesResponse :
             never;
 
-export type Weather<T extends Sport> =
-    T extends Sport.NFL ? NFLWeatherResponse :
-        T extends Sport.MLB ? MLBWeatherResponse :
+export type Weather<T extends League> =
+    T extends League.NFL ? NFLWeatherResponse :
+        T extends League.MLB ? MLBWeatherResponse :
             never;
 
-export type Injuries<T extends Sport> =
-    T extends Sport.NFL ? NFLInjuriesResponse :
-        T extends Sport.NBA ? NBAInjuriesResponse :
+export type Injuries<T extends League> =
+    T extends League.NFL ? NFLInjuriesResponse :
+        T extends League.NBA ? NBAInjuriesResponse :
             never;

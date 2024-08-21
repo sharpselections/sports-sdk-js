@@ -1,22 +1,22 @@
 import {
-    FantasyProsClientSports, GetRankingsParameters, RankingsResponse, RankingsWithScoringProps,
+    FantasyProsClientLeague, GetRankingsParameters, RankingsResponse, RankingsWithScoringProps,
 } from "./types.ts";
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import {League, SportsSdkClient} from "@sports-sdk/core";
 
 export interface RequestParams {
     [key: string]: any;
 }
 
-export class FantasyProsClient<S extends FantasyProsClientSports> extends SportsSdkClient {
+export class FantasyProsClient<S extends FantasyProsClientLeague> extends SportsSdkClient {
     protected readonly apiKey: string;
 
     /**
      * Create a FantasyPros API client
-     * @param sport - The sport to get data from
+     * @param league - The league to get data from
      * @param apiKey - The API key for authenticating API requests. If not provided, it will look for `FANTASY_PROS_KEY` in the environment variables.
      * @throws Will throw an error if the API key is not provided or found in the environment variables.
      */
-    constructor(protected readonly sport: S, apiKey?: string) {
+    constructor(protected readonly league: S, apiKey?: string) {
         super("https://api.fantasypros.com/v2/json");
         const key = apiKey || process.env.FANTASY_PROS_KEY;
         if (!key) {
@@ -26,12 +26,12 @@ export class FantasyProsClient<S extends FantasyProsClientSports> extends Sports
         this.apiKey = key;
     }
 
-    private isMlb(): this is FantasyProsClient<Sport.MLB> {
-        return this.sport as Sport === Sport.MLB;
+    private isMlb(): this is FantasyProsClient<League.MLB> {
+        return this.league as League === League.MLB;
     }
 
-    private isNfl(): this is FantasyProsClient<Sport.NFL> {
-        return this.sport as Sport === Sport.NFL;
+    private isNfl(): this is FantasyProsClient<League.NFL> {
+        return this.league as League === League.NFL;
     }
 
     /**
@@ -81,7 +81,7 @@ export class FantasyProsClient<S extends FantasyProsClientSports> extends Sports
             ),
         };
         return await this.request<RankingsResponse>({
-            path: `/${this.sport.toLowerCase()}/${season}/consensus-rankings`,
+            path: `/${this.league.toLowerCase()}/${season}/consensus-rankings`,
             additionalParams,
         });
     }

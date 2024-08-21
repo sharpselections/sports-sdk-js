@@ -1,11 +1,11 @@
 import {
-    SportPlayerInfoMap,
-    SportPlayerStatsMap,
-    SportScheduleMap,
-    SportTeamInfoMap,
-    SportTeamStatsMap,
+    LeaguePlayerInfoMap,
+    LeaguePlayerStatsMap,
+    LeagueScheduleMap,
+    LeagueTeamInfoMap,
+    LeagueTeamStatsMap,
 } from "./types";
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import {League, SportsSdkClient} from "@sports-sdk/core";
 import axios from "axios";
 
 /**
@@ -53,11 +53,11 @@ export class RollingInsightsClient extends SportsSdkClient {
      * Sends a GET request to the specified URL with the provided parameters.
      * @param url - The URL to send the request to.
      * @param additionalParams - Additional query parameters for the request.
-     * @param sport - The sport to extract from the response.
+     * @param league - The league to extract from the response.
      * @returns The response data from the API or undefined if the API returns 304
      * @throws Will throw an error if the request fails.
      */
-    private async request<T>(url: string, additionalParams: AdditionalParams = {}, sport: Sport): Promise<T | undefined> {
+    private async request<T>(url: string, additionalParams: AdditionalParams = {}, league: League): Promise<T | undefined> {
         const {team_id, player_id} = additionalParams;
 
         // Handle cases where both team_id and player_id are provided
@@ -69,7 +69,7 @@ export class RollingInsightsClient extends SportsSdkClient {
         const response = await this.session.get(`${url}?${Date.now()}`, {params});
 
         if (response.status === 200) {
-            return response.data.data[sport] as T;
+            return response.data.data[league] as T;
         }
         if (response.status === 304) {
             return undefined;
@@ -78,20 +78,20 @@ export class RollingInsightsClient extends SportsSdkClient {
     }
 
     /**
-     * Builds the API path with optional date and sports parameters.
+     * Builds the API path with optional date and leagues parameters.
      * @param basePath - The base path of the API endpoint.
      * @param date - Optional date parameter.
-     * @param sports - Optional array of sports or a single sport.
+     * @param leagues - Optional array of leagues or a single league.
      * @returns The constructed API path.
      */
-    private buildApiPath(basePath: string, date?: string, sports?: Sport[] | Sport): string {
+    private buildApiPath(basePath: string, date?: string, leagues?: League[] | League): string {
         let apiPath = basePath;
         if (date) apiPath += `/${date}`;
-        if (sports) {
-            if (Array.isArray(sports)) {
-                apiPath += `/${sports.join("-")}`;
+        if (leagues) {
+            if (Array.isArray(leagues)) {
+                apiPath += `/${leagues.join("-")}`;
             } else {
-                apiPath += `/${sports}`;
+                apiPath += `/${leagues}`;
             }
         }
         return apiPath;
@@ -114,166 +114,166 @@ export class RollingInsightsClient extends SportsSdkClient {
 
     /**
      * Fetches the season schedule data.
-     * @param params - Object containing optional date, sport, and teamId parameters.
+     * @param params - Object containing optional date, league, and teamId parameters.
      * @returns The season schedule data.
      */
-    public async getSeasonSchedule({date, sport, teamId}: {
+    public async getSeasonSchedule({date, league, teamId}: {
         date?: string,
-        sport: Sport,
+        league: League,
         teamId?: string,
-    }): Promise<Array<SportScheduleMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/schedule-season", date, sport);
+    }): Promise<Array<LeagueScheduleMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/schedule-season", date, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return await this.request<Array<SportScheduleMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return await this.request<Array<LeagueScheduleMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches the weekly schedule data.
-     * @param params - Object containing optional date, sport, and teamId parameters.
+     * @param params - Object containing optional date, league, and teamId parameters.
      * @returns The weekly schedule data.
      * @refreshable
      */
-    public async getWeeklySchedule({date = "now", sport, teamId}: {
+    public async getWeeklySchedule({date = "now", league, teamId}: {
         date?: string,
-        sport: Sport,
+        league: League,
         teamId?: string,
-    }): Promise<Array<SportScheduleMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/schedule-week", date, sport);
+    }): Promise<Array<LeagueScheduleMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/schedule-week", date, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return await this.request<Array<SportScheduleMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return await this.request<Array<LeagueScheduleMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches the daily schedule data.
-     * @param params - Object containing optional date, sport, teamId, and gameId parameters.
+     * @param params - Object containing optional date, league, teamId, and gameId parameters.
      * @returns The daily schedule data.
      * @refreshable
      */
-    public async getDailySchedule({date = "now", sport, teamId, gameId}: {
+    public async getDailySchedule({date = "now", league, teamId, gameId}: {
         date?: string,
         gameId?: string,
-        sport: Sport,
+        league: League,
         teamId?: string
-    }): Promise<Array<SportScheduleMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/schedule", date, sport);
+    }): Promise<Array<LeagueScheduleMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/schedule", date, league);
         const additionalParams = this.buildAdditionalParams(teamId, gameId);
 
-        return await this.request<Array<SportScheduleMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return await this.request<Array<LeagueScheduleMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches live data.
-     * @param params - Object containing optional date, sport, teamId, and gameId parameters.
+     * @param params - Object containing optional date, league, teamId, and gameId parameters.
      * @returns The live data.
      */
-    public async getLive({date = "now", sport, teamId, gameId}: {
+    public async getLive({date = "now", league, teamId, gameId}: {
         date?: string,
         gameId?: string,
-        sport: Sport,
+        league: League,
         teamId?: string
     }): Promise<any> {
-        const apiPath = this.buildApiPath("/live", date, sport);
+        const apiPath = this.buildApiPath("/live", date, league);
         const additionalParams = this.buildAdditionalParams(teamId, gameId);
 
-        return this.request<any>(apiPath, additionalParams, sport);
+        return this.request<any>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches team information.
-     * @param params - Object containing optional sport, teamId, and fromAssets parameters.
+     * @param params - Object containing optional league, teamId, and fromAssets parameters.
      * @returns The team information.
      * @refreshable
      */
-    public async getTeamInfo({sport, teamId}: {
-        sport: Sport,
+    public async getTeamInfo({league, teamId}: {
+        league: League,
         teamId?: string,
-    }): Promise<SportTeamInfoMap[typeof sport] | Array<SportTeamInfoMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/team-info", undefined, sport);
+    }): Promise<LeagueTeamInfoMap[typeof league] | Array<LeagueTeamInfoMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/team-info", undefined, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return this.request<SportTeamInfoMap[typeof sport] | Array<SportTeamInfoMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return this.request<LeagueTeamInfoMap[typeof league] | Array<LeagueTeamInfoMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches team season statistics.
-     * @param params - Object containing optional date, sport, and teamId parameters.
+     * @param params - Object containing optional date, league, and teamId parameters.
      * @returns The team season statistics.
      * @refreshable
      */
-    public async getTeamStats({date, sport, teamId}: {
+    public async getTeamStats({date, league, teamId}: {
         date?: string,
-        sport: Sport,
+        league: League,
         teamId?: string,
-    }): Promise<SportTeamStatsMap[typeof sport] | Array<SportTeamStatsMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/team-stats", date, sport);
+    }): Promise<LeagueTeamStatsMap[typeof league] | Array<LeagueTeamStatsMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/team-stats", date, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return this.request<SportTeamStatsMap[typeof sport] | Array<SportTeamStatsMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return this.request<LeagueTeamStatsMap[typeof league] | Array<LeagueTeamStatsMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches player information.
-     * @param params - Object containing optional sport, teamId, and fromAssets parameters.
+     * @param params - Object containing optional league, teamId, and fromAssets parameters.
      * @returns The player information.
      * @refreshable
      */
-    public async getPlayerInfo({sport, teamId}: {
-        sport: Sport,
+    public async getPlayerInfo({league, teamId}: {
+        league: League,
         teamId?: string,
-    }): Promise<SportPlayerInfoMap[typeof sport] | Array<SportPlayerInfoMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/player-info", undefined, sport);
+    }): Promise<LeaguePlayerInfoMap[typeof league] | Array<LeaguePlayerInfoMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/player-info", undefined, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return this.request<SportPlayerInfoMap[typeof sport] | Array<SportPlayerInfoMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return this.request<LeaguePlayerInfoMap[typeof league] | Array<LeaguePlayerInfoMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches player statistics.
-     * @param params - Object containing optional date, sport, teamId, and playerId parameters.
+     * @param params - Object containing optional date, league, teamId, and playerId parameters.
      * @returns The player statistics.
      * @refreshable
      */
-    public async getPlayerStats({date, sport, teamId, playerId}: {
+    public async getPlayerStats({date, league, teamId, playerId}: {
         date?: string,
+        league: League,
         playerId?: string,
-        sport: Sport,
         teamId?: string
-    }): Promise<SportPlayerStatsMap[typeof sport] | Array<SportPlayerStatsMap[typeof sport]> | undefined> {
-        const apiPath = this.buildApiPath("/player-stats", date, sport);
+    }): Promise<LeaguePlayerStatsMap[typeof league] | Array<LeaguePlayerStatsMap[typeof league]> | undefined> {
+        const apiPath = this.buildApiPath("/player-stats", date, league);
         const additionalParams = this.buildAdditionalParams(teamId, undefined, playerId);
 
-        return this.request<SportPlayerStatsMap[typeof sport] | Array<SportPlayerStatsMap[typeof sport]>>(apiPath, additionalParams, sport);
+        return this.request<LeaguePlayerStatsMap[typeof league] | Array<LeaguePlayerStatsMap[typeof league]>>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches player injuries.
-     * @param params - Object containing optional sport and teamId parameters.
+     * @param params - Object containing optional league and teamId parameters.
      * @returns The player injuries.
      */
-    public async getPlayerInjuries({sport, teamId}: {
-        sport: Sport,
+    public async getPlayerInjuries({league, teamId}: {
+        league: League,
         teamId?: string,
     }): Promise<any> {
-        const apiPath = this.buildApiPath("/injuries", undefined, sport);
+        const apiPath = this.buildApiPath("/injuries", undefined, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return this.request<any>(apiPath, additionalParams, sport);
+        return this.request<any>(apiPath, additionalParams, league);
     }
 
     /**
      * Fetches the team depth chart.
-     * @param params - Object containing optional sport and teamId parameters.
+     * @param params - Object containing optional league and teamId parameters.
      * @returns The team depth chart.
      */
-    public async getTeamDepthChart({sport, teamId}: {
-        sport: Sport,
+    public async getTeamDepthChart({league, teamId}: {
+        league: League,
         teamId?: string,
     }): Promise<any> {
-        const apiPath = this.buildApiPath("/depth-charts", undefined, sport);
+        const apiPath = this.buildApiPath("/depth-charts", undefined, league);
         const additionalParams = this.buildAdditionalParams(teamId);
 
-        return this.request<any>(apiPath, additionalParams, sport);
+        return this.request<any>(apiPath, additionalParams, league);
     }
 }

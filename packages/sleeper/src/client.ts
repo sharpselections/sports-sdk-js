@@ -10,27 +10,27 @@ import {
     User,
     UserInfo
 } from "./types.ts";
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import {League, SportsSdkClient} from "@sports-sdk/core";
 
-export const SleeperClientSportsList = [
-    Sport.NBA,
-    Sport.NFL,
-    Sport.EPL,
+export const SleeperClientLeaguesList = [
+    League.NBA,
+    League.NFL,
+    League.EPL,
     "LALIGA"
 ] as const;
 
-export type SleeperClientSports = typeof SleeperClientSportsList[number];
+export type SleeperClientLeagues = typeof SleeperClientLeaguesList[number];
 
-export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClient {
-    readonly sportMappings: { [K in S]: string } = {
-        [Sport.EPL]: "clubsoccer:epl",
-        [Sport.NBA]: "nba",
-        [Sport.NFL]: "nfl",
+export class SleeperClient<S extends SleeperClientLeagues> extends SportsSdkClient {
+    readonly leagueMappings: { [K in S]: string } = {
+        [League.EPL]: "clubsoccer:epl",
+        [League.NBA]: "nba",
+        [League.NFL]: "nfl",
         // will add LALIGA to core sports if/when it is more widely supported
         "LALIGA": "clubsoccer:laliga",
     } as { [K in S]: string };
 
-    constructor(protected readonly sport: S) {
+    constructor(protected readonly league: S) {
         super("https://api.sleeper.app/v1");
     }
 
@@ -55,7 +55,7 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns The current state of the sport.
      */
     async stateLookup(): Promise<State> {
-        const path = "/state/" + this.sportMappings[this.sport];
+        const path = "/state/" + this.leagueMappings[this.league];
         return await this.request<State>({path});
     }
 
@@ -76,10 +76,10 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns The user's leagues.
      */
     async getUserLeagues({user, season}: {
-        user: string,
-        season: string
+        season: string,
+        user: string
     }): Promise<Array<LeagueInfo>> {
-        const path = `/user/${user}/leagues/${this.sportMappings[this.sport]}/${season}`;
+        const path = `/user/${user}/leagues/${this.leagueMappings[this.league]}/${season}`;
         return await this.request<Array<LeagueInfo>>({path});
     }
 
@@ -134,8 +134,8 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns The playoff bracket for the specified league.
      */
     async getLeaguePlayoffBracket({league, bracket}: {
-        league: string,
-        bracket: string
+        bracket: string,
+        league: string
     }): Promise<Array<PlayoffMatchup>> {
         const path = `/league/${league}/${bracket}_bracket`;
         return await this.request<Array<PlayoffMatchup>>({path});
@@ -172,10 +172,10 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns The list of details for all drafts for the specified user.
      */
     async getUserDraft({user, season}: {
-        user: string,
-        season: string
+        season: string,
+        user: string
     }): Promise<Array<Draft>> {
-        const path = `/user/${user}/drafts/${this.sportMappings[this.sport]}/${season}`;
+        const path = `/user/${user}/drafts/${this.leagueMappings[this.league]}/${season}`;
         return await this.request<Array<Draft>>({path});
     }
 
@@ -224,7 +224,7 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns All players on Sleeper for the specified sport.
      */
     async getAllPlayers(): Promise<{ [key: string]: Player }> {
-        const path = `/players/${this.sportMappings[this.sport]}`;
+        const path = `/players/${this.leagueMappings[this.league]}`;
         return await this.request<{ [key: string]: Player }>({path});
     }
 
@@ -236,11 +236,11 @@ export class SleeperClient<S extends SleeperClientSports> extends SportsSdkClien
      * @returns The list of trending players for the specified sport.
      */
     async getTrendingPlayers({type, lookback_hours, limit}: {
-        type: string,
+        limit: number,
         lookback_hours: number,
-        limit: number
+        type: string
     }): Promise<Array<TrendingPlayer>> {
-        const path = `/players/${this.sportMappings[this.sport]}/trending/${type}?lookback_hours=${lookback_hours}&limit=${limit}`;
+        const path = `/players/${this.leagueMappings[this.league]}/trending/${type}?lookback_hours=${lookback_hours}&limit=${limit}`;
         return await this.request<Array<TrendingPlayer>>({path});
     }
 }

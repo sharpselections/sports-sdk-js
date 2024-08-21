@@ -1,4 +1,4 @@
-import {RequestParams, Sport, SportsSdkClient} from "@sports-sdk/core";
+import {RequestParams, League, SportsSdkClient} from "@sports-sdk/core";
 import {
     BaseEntity,
     BaseResponse, FixtureEntity, FixtureOdds, FixturePlayerResults, FixtureTeamResults,
@@ -37,11 +37,11 @@ export class OpticOddsClient extends SportsSdkClient {
         this.apiKey = key;
     }
 
-    public static coreSportToOpticLeague(sport: Sport){
-        if (sport === Sport.EPL){
+    public static coreSportToOpticLeague(league: League){
+        if (league === League.EPL){
             return "england_-_premier_league";
         }
-        return sport.toLowerCase();
+        return league.toLowerCase();
     }
 
     /**

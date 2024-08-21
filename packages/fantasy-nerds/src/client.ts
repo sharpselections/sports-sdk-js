@@ -1,4 +1,4 @@
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import {League, SportsSdkClient} from "@sports-sdk/core";
 import {DepthChartsResponse, NewsResponse, PlayersResponse, TeamsResponse} from "./responses/common.ts";
 import {
     AuctionValues,
@@ -34,17 +34,17 @@ import {ZodObject} from "zod";
 import {NBADraftRankingsResponseSchema} from "./responses/nba.ts";
 import {MLBDraftRankingsResponseSchema} from "./responses/mlb.ts";
 
-export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> extends SportsSdkClient {
+export class FantasyNerdsClient<T extends League.NFL | League.NBA | League.MLB> extends SportsSdkClient {
     protected readonly apiToken: string;
 
     /**
      * Creates a Fantasy Nerds client.
-     * @param sport - The sport to get data from
+     * @param league - The sport to get data from
      * @param apiToken - The API token for authenticating API requests. If not provided, it will look for `FANTASY_NERDS_KEY` in the environment variables.
      * @throws Will throw an error if the API key is not provided or found in the environment variables.
      */
-    constructor(protected readonly sport: T, apiToken?: string) {
-        super(`https://api.fantasynerds.com/v1/${sport.toLowerCase()}`);
+    constructor(protected readonly league: T, apiToken?: string) {
+        super(`https://api.fantasynerds.com/v1/${league.toLowerCase()}`);
         const token = apiToken || process.env.FANTASY_NERDS_KEY;
 
         if (!token) {
@@ -63,8 +63,8 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @throws Will throw an error if the request fails.
      */
     protected async request<T>({apiPath, additionalParams = {}, parser}: {
-        apiPath: string,
         additionalParams?: RequestParams,
+        apiPath: string,
         parser?: ZodObject<any>
     }): Promise<T> {
         const params = {apikey: this.apiToken, ...additionalParams};
@@ -99,8 +99,8 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      */
     public async getDraftRankings(params?: DraftRankingsParams): Promise<DraftRankings<T>> {
         // Abstract this out to be more generic if this pattern is more widely needed
-        const parser = this.sport === Sport.NFL ? NFLDraftRankingsResponseSchema :
-            this.sport === Sport.NBA ? NBADraftRankingsResponseSchema :
+        const parser = this.league === League.NFL ? NFLDraftRankingsResponseSchema :
+            this.league === League.NBA ? NBADraftRankingsResponseSchema :
                 MLBDraftRankingsResponseSchema
         return this.request<DraftRankings<T>>({
             apiPath: "/draft-rankings",
@@ -150,7 +150,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NBA, MLB
      */
     public async getLineups(params?: LineupsParams): Promise<Lineups<T>> {
-        if (this.sport !== Sport.NBA && this.sport !== Sport.MLB) {
+        if (this.league !== League.NBA && this.league !== League.MLB) {
             throw new Error("Lineups are only available for NBA and MLB.");
         }
         return this.request<Lineups<T>>({
@@ -164,7 +164,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NBA, MLB
      */
     public async getPlayerRater(): Promise<PlayerRater<T>> {
-        if (this.sport !== Sport.NBA && this.sport !== Sport.MLB) {
+        if (this.league !== League.NBA && this.league !== League.MLB) {
             throw new Error("Player Rater is only available for NBA and MLB.");
         }
         return this.request<PlayerRater<T>>({apiPath: "/player-rater"});
@@ -175,7 +175,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL, MLB
      */
     public async getAuctionValues(params?: AuctionValuesParams): Promise<AuctionValues<T>> {
-        if (this.sport !== Sport.NFL && this.sport !== Sport.MLB) {
+        if (this.league !== League.NFL && this.league !== League.MLB) {
             throw new Error("Auction Values are only available for NFL and MLB.");
         }
         return this.request<AuctionValues<T>>({
@@ -189,7 +189,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL, MLB
      */
     public async getWeatherForecasts(): Promise<Weather<T>> {
-        if (this.sport !== Sport.NFL && this.sport !== Sport.MLB) {
+        if (this.league !== League.NFL && this.league !== League.MLB) {
             throw new Error("Weather Forecasts are only available for NFL and MLB.");
         }
         return this.request<Weather<T>>({apiPath: "/weather"});
@@ -200,7 +200,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getAverageDraftPosition(params?: RequestParams): Promise<NFLPlayerADPResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Average Draft Position is only available for NFL.");
         }
         return this.request<NFLPlayerADPResponse>({
@@ -214,7 +214,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getBestBallRankings(): Promise<NFLRankingsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Best Ball Rankings are only available for NFL.");
         }
         return this.request<NFLRankingsResponse>({apiPath: "/bestball"});
@@ -225,7 +225,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getByeWeeks(): Promise<NFLByesResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Bye Weeks are only available for NFL.");
         }
         return this.request<NFLByesResponse>({apiPath: "/byes"});
@@ -236,7 +236,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getDefensiveRanks(): Promise<NFLDefensiveRanksResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Defensive Ranks are only available for NFL.");
         }
         return this.request<NFLDefensiveRanksResponse>({apiPath: "/defense-rankings"});
@@ -247,7 +247,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getDynastyRankings(): Promise<NFLRankingsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Dynasty Rankings are only available for NFL.");
         }
         return this.request<NFLRankingsResponse>({apiPath: "/dynasty"});
@@ -258,7 +258,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getFantasyLeaders(params?: FantasyLeadersParams): Promise<NFLFantasyLeadersResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Fantasy Leaders are only available for NFL.");
         }
         return this.request<NFLFantasyLeadersResponse>({
@@ -272,7 +272,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL, NBA
      */
     public async getInjuryReports(): Promise<Injuries<T>> {
-        if (this.sport !== Sport.NFL && this.sport !== Sport.NBA) {
+        if (this.league !== League.NFL && this.league !== League.NBA) {
             throw new Error("Injury Reports are only available for NFL & NBA.");
         }
         return this.request<Injuries<T>>({apiPath: "/injuries"});
@@ -283,7 +283,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getNflPicks(): Promise<NFLPicksResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("NFL Picks are only available for NFL.");
         }
         return this.request<NFLPicksResponse>({apiPath: "/nfl-picks"});
@@ -294,7 +294,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getPlayoffProjections(params?: RequestParams): Promise<NFLPlayoffProjectionsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Playoff Projections are only available for NFL.");
         }
         return this.request<NFLPlayoffProjectionsResponse>({
@@ -308,7 +308,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getRestOfSeasonProjections(): Promise<NFLROSProjectionsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Rest of Season Projections are only available for NFL.");
         }
         return this.request<NFLROSProjectionsResponse>({apiPath: "/ros"});
@@ -319,7 +319,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getWeeklyProjections(params: WeeklyProjectionsParams): Promise<NFLWeeklyProjectionsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Weekly Projections are only available for NFL.");
         }
         return this.request<NFLWeeklyProjectionsResponse>({
@@ -333,7 +333,7 @@ export class FantasyNerdsClient<T extends Sport.NFL | Sport.NBA | Sport.MLB> ext
      * @supports NFL
      */
     public async getWeeklyRankings(params?: DraftRankingsParams): Promise<NFLWeeklyRankingsResponse> {
-        if (this.sport !== Sport.NFL) {
+        if (this.league !== League.NFL) {
             throw new Error("Weekly Rankings are only available for NFL.");
         }
         return this.request<NFLWeeklyRankingsResponse>({

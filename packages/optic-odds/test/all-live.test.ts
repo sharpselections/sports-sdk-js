@@ -1,5 +1,5 @@
 import {OpticOddsClient, OpticOddsSportsbooks} from "../src";
-import {allApiTests, Sport} from "@sports-sdk/core";
+import {allApiTests, League} from "@sports-sdk/core";
 
 const nock = require("nock");
 
@@ -12,7 +12,7 @@ describe("OpticOdds client live tests", () => {
     const testPlayerID = "5D770684D025";
     const redSoxID = "1232720C5D66";
     const yankeesID = "121EBAED4535";
-    for (let sport of Object.values(Sport)) {
+    for (let sport of Object.values(League)) {
         describe(sport, () => {
             const opticLeague = OpticOddsClient.coreSportToOpticLeague(sport);
             describe("league specific", () => {

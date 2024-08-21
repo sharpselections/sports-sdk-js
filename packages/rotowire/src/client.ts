@@ -1,4 +1,4 @@
-import {Sport, SportsSdkClient} from "@sports-sdk/core";
+import {League, SportsSdkClient} from "@sports-sdk/core";
 import {InjuriesResponse, LineupResponse, LineupsParams, NewsResponse, PlayersResponse} from "./types.ts";
 import {NewsParameters} from "./news/common.ts";
 
@@ -6,25 +6,25 @@ type RequestParams = {
     [key: string]: any
 };
 
-export class RotowireClient<S extends Sport> extends SportsSdkClient {
+export class RotowireClient<S extends League> extends SportsSdkClient {
     protected readonly apiToken: string;
-    static readonly sportMappings = {
-        [Sport.EPL]: "/Soccer/EPL",
-        [Sport.MLB]: "/Baseball/MLB",
-        [Sport.NBA]: "/Basketball/NBA",
-        [Sport.NCAAF]: "/Football/CFB",
-        [Sport.NFL]: "/Football/NFL",
-        [Sport.NHL]: "/Hockey/NHL",
+    static readonly leagueMappings = {
+        [League.EPL]: "/Soccer/EPL",
+        [League.MLB]: "/Baseball/MLB",
+        [League.NBA]: "/Basketball/NBA",
+        [League.NCAAF]: "/Football/CFB",
+        [League.NFL]: "/Football/NFL",
+        [League.NHL]: "/Hockey/NHL",
     };
 
     /**
      * Creates a Rotowire client.
-     * @param sport - The sport to get data from
+     * @param league - The league to get data from
      * @param apiToken - The API token for authenticating API requests. If not provided, it will look for `ROTOWIRE_TOKEN` in the environment variables.
      * @throws Will throw an error if the API token is not provided or found in the environment variables.
      */
-    constructor(protected readonly sport: S, apiToken?: string) {
-        super(`https://api.rotowire.com${RotowireClient.sportMappings[sport]}`);
+    constructor(protected readonly league: S, apiToken?: string) {
+        super(`https://api.rotowire.com${RotowireClient.leagueMappings[league]}`);
         const token = apiToken || process.env.ROTOWIRE_TOKEN;
 
         if (!token) {
@@ -42,8 +42,8 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
      * @throws Will throw an error if the request fails.
      */
     protected async request<T>({apiPath, additionalParams = {}}: {
-        apiPath: string,
-        additionalParams?: RequestParams
+        additionalParams?: RequestParams,
+        apiPath: string
     }): Promise<T> {
         const params = {key: this.apiToken, "format": "json", ...additionalParams};
         const response = await this.session.get(apiPath, {params});
@@ -55,7 +55,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
     }
 
     /**
-     * Retrieves players for the selected sport. The typing of the response is intentionally sparse as this endpoint is primarily useful for retrieving RW player ids.
+     * Retrieves players for the selected league. The typing of the response is intentionally sparse as this endpoint is primarily useful for retrieving RW player ids.
      * @supports ALL
      */
     public async getPlayers<T extends PlayersResponse<S> = PlayersResponse<S>>(): Promise<T> {
@@ -65,7 +65,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
     }
 
     /**
-     * Retrieves news for the selected sport.
+     * Retrieves news for the selected league.
      * @supports ALL
      */
     public async getNews<T extends NewsResponse<S> = NewsResponse<S>>(params?: NewsParameters): Promise<T> {
@@ -76,7 +76,7 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
     }
 
     /**
-     * Retrieves injuries for the selected sport.
+     * Retrieves injuries for the selected league.
      * @supports ALL
      */
     public async getInjuries<T extends InjuriesResponse<S> = InjuriesResponse<S>>(): Promise<T> {
@@ -86,15 +86,15 @@ export class RotowireClient<S extends Sport> extends SportsSdkClient {
     }
 
     /**
-     * Retrieves lineups for the selected sport.
+     * Retrieves lineups for the selected league.
      * @supports NBA, MLB, EPL
      */
     public async getLineups<T extends LineupResponse<S> = LineupResponse<S>>(params?: LineupsParams<S>): Promise<T> {
-        if (this.sport !== Sport.NBA && this.sport !== Sport.MLB && this.sport !== Sport.EPL) {
+        if (this.league !== League.NBA && this.league !== League.MLB && this.league !== League.EPL) {
             throw new Error("Only NBA, MLB, & EPL are supported!");
         }
         return this.request<T>({
-            apiPath: `/${this.sport === Sport.MLB ? "Expected" : ""}Lineups.php`,
+            apiPath: `/${this.league === League.MLB ? "Expected" : ""}Lineups.php`,
             additionalParams: params
         });
     }

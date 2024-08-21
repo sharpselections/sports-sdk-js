@@ -1,12 +1,12 @@
 import {FantasyProsClient} from "../src";
-import {allApiTests, Sport} from "@sports-sdk/core";
+import {allApiTests, League} from "@sports-sdk/core";
 
 const nock = require("nock");
 
 const testSeason = 2023;
 
 describe("FantasyPros client live tests", () => {
-    for (let sport of [Sport.NFL, Sport.NBA, Sport.MLB, Sport.NHL]) {
+    for (let sport of [League.NFL, League.NBA, League.MLB, League.NHL]) {
         const client = new FantasyProsClient(sport);
         const nockEndpoint = nock("https://api.fantasypros.com/v2/json");
         describe(sport, () => {
@@ -24,9 +24,9 @@ describe("FantasyPros client live tests", () => {
                 ]
             })
         });
-        if (sport !== Sport.MLB) {
+        if (sport !== League.MLB) {
             test("it can handle scoring parameter", async () => {
-                const scoring = sport === Sport.NFL ? "PPR" : "ROTO";
+                const scoring = sport === League.NFL ? "PPR" : "ROTO";
                 const rankings = await client.getRankings({
                     season: testSeason,
                     scoring,
@@ -35,7 +35,7 @@ describe("FantasyPros client live tests", () => {
             });
         }
         test("it can handle showing experts", async () => {
-            const expert = sport === Sport.NFL || sport === Sport.MLB ? "7" : sport === Sport.NBA ? "23" : "9";
+            const expert = sport === League.NFL || sport === League.MLB ? "7" : sport === League.NBA ? "23" : "9";
             const rankings = await client.getRankings({
                 season: testSeason,
                 showExperts: true
@@ -46,13 +46,13 @@ describe("FantasyPros client live tests", () => {
             expect(rankings.players[0].experts).toHaveProperty(expert);
         });
         test("it can handle different rankings types", async () => {
-            const rankingsType = sport === Sport.NHL ? "ADP" : "DK";
+            const rankingsType = sport === League.NHL ? "ADP" : "DK";
             const rankings = await client.getRankings({
                 season: testSeason,
                 rankingsType,
             });
-            expect(rankings.type).toContain(sport === Sport.NHL ? rankingsType.toLowerCase() : "Dynasty");
-            expect(rankings.ranking_type_name).toEqual(sport === Sport.NHL ? rankingsType.toLowerCase() : "dynasty");
+            expect(rankings.type).toContain(sport === League.NHL ? rankingsType.toLowerCase() : "Dynasty");
+            expect(rankings.ranking_type_name).toEqual(sport === League.NHL ? rankingsType.toLowerCase() : "dynasty");
         });
     }
 })

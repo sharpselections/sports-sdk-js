@@ -1,25 +1,25 @@
 import {PlayersResponse, RotowireClient} from "../src";
-import {allApiTests, Sport} from "@sports-sdk/core";
+import {allApiTests, League} from "@sports-sdk/core";
 
 const nock = require("nock");
 
 
 describe("RotoWire client live tests", () => {
-    const allSports = Object.keys(Sport) as Array<keyof typeof Sport>;
+    const allLeagues = Object.keys(League) as Array<keyof typeof League>;
     const methodsMap = {
-        "getNews": allSports,
-        "getInjuries": allSports,
-        "getLineups": [Sport.MLB, Sport.NBA, Sport.EPL]
+        "getNews": allLeagues,
+        "getInjuries": allLeagues,
+        "getLineups": [League.MLB, League.NBA, League.EPL]
     };
-    allSports.map((value) => {
-        const sport = value as Sport;
-        describe(sport, () => {
-            const client = new RotowireClient(sport);
-            const nockEndpoint = nock(`https://api.rotowire.com${RotowireClient.sportMappings[sport]}`);
-            const testCases = Object.entries(methodsMap).filter(([_, sports]) => sports.includes(sport)).map(([method]) => ({
-                method: method as keyof RotowireClient<typeof sport>
+    allLeagues.map((value) => {
+        const league = value as League;
+        describe(league, () => {
+            const client = new RotowireClient(league);
+            const nockEndpoint = nock(`https://api.rotowire.com${RotowireClient.leagueMappings[league]}`);
+            const testCases = Object.entries(methodsMap).filter(([_, sports]) => sports.includes(league)).map(([method]) => ({
+                method: method as keyof RotowireClient<typeof league>
             })).map(({method}) => ({method, liveTests: {passes: true}}));
-            allApiTests<RotowireClient<typeof sport>>({
+            allApiTests<RotowireClient<typeof league>>({
                 client,
                 nockEndpoint,
                 testCases
@@ -37,11 +37,11 @@ describe("RotoWire client live tests", () => {
             test("Can successfully call & access players data", async () => {
                 let playersFreeAgentsTeams = await client.getPlayers();
                 console.log(playersFreeAgentsTeams);
-                if (sport === Sport.NCAAF) {
-                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<Sport.NCAAF>;
+                if (league === League.NCAAF) {
+                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<League.NCAAF>;
                     expect(playersFreeAgentsTeams[0].Link).toContain("rotowire.com")
                 } else {
-                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<Sport.EPL>;
+                    playersFreeAgentsTeams = playersFreeAgentsTeams as PlayersResponse<League.EPL>;
                     expect(playersFreeAgentsTeams.FreeAgents[0].Link).toContain("rotowire.com")
                     expect(playersFreeAgentsTeams.Teams[0].Players[0].Link).toContain("rotowire.com")
                 }

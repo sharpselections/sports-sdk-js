@@ -1,13 +1,13 @@
 import {RollingInsightsClient} from "../src";
-import {allApiTests, Sport} from "@sports-sdk/core";
+import {allApiTests, League} from "@sports-sdk/core";
 
 const nock = require("nock");
 
 describe("Rolling Insights client live tests", () => {
     const client = new RollingInsightsClient();
     const nockEndpoint = nock("http://rest.datafeeds.rolling-insights.com/api/v1");
-    for (const sport of Object.values(Sport)) {
-        if (sport === Sport.EPL || sport === Sport.NCAAF){
+    for (const sport of Object.values(League)) {
+        if (sport === League.EPL || sport === League.NCAAF){
             // EPL and NCAAF types aren't added yet
             continue;
         }

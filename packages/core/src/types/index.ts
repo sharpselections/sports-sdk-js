@@ -1,5 +1,5 @@
 export * from "./utils";
-export enum Sport {
+export enum League {
     EPL = "EPL",
     MLB = "MLB",
     NBA = "NBA",

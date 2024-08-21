@@ -1,6 +1,6 @@
-import {Sport} from "@sports-sdk/core";
+import {League} from "@sports-sdk/core";
 
-export type FantasyProsClientSports = Omit<Sport, Sport.EPL | Sport.NCAAF>;
+export type FantasyProsClientLeague = Omit<League, League.EPL | League.NCAAF>;
 
 /**
  * NFL specific types
@@ -122,33 +122,33 @@ export type FantasyProsNHLScoringType = "ROTO" | "YAHOO" | "ESPN";
  */
 
 // Position
-export type FantasyProsPosition<T extends FantasyProsClientSports> =
-    T extends Sport.NFL ? FantasyProsNFLPosition :
-        T extends Sport.NBA ? FantasyProsNBAPosition :
-            T extends Sport.MLB ? FantasyProsMLBPosition :
-                T extends Sport.NHL ? FantasyProsNHLPosition :
+export type FantasyProsPosition<T extends FantasyProsClientLeague> =
+    T extends League.NFL ? FantasyProsNFLPosition :
+        T extends League.NBA ? FantasyProsNBAPosition :
+            T extends League.MLB ? FantasyProsMLBPosition :
+                T extends League.NHL ? FantasyProsNHLPosition :
                     never;
 
-export type FantasyProsRankingsType<T extends FantasyProsClientSports> =
-    T extends Sport.NFL ? FantasyProsNFLRankingsType :
-        T extends Sport.NBA ? FantasyProsNBARankingsType :
-            T extends Sport.MLB ? FantasyProsMLBRankingsType :
-                T extends Sport.NHL ? FantasyProsNHLRankingsType :
+export type FantasyProsRankingsType<T extends FantasyProsClientLeague> =
+    T extends League.NFL ? FantasyProsNFLRankingsType :
+        T extends League.NBA ? FantasyProsNBARankingsType :
+            T extends League.MLB ? FantasyProsMLBRankingsType :
+                T extends League.NHL ? FantasyProsNHLRankingsType :
                     never;
 
-export type FantasyProsScoringType<T extends Omit<FantasyProsClientSports, Sport.MLB>> =
-    T extends Sport.NFL ? FantasyProsNFLScoringType :
-        T extends Sport.NBA ? FantasyProsNBAScoringType :
-            T extends Sport.NHL ? FantasyProsNHLScoringType :
+export type FantasyProsScoringType<T extends Omit<FantasyProsClientLeague, League.MLB>> =
+    T extends League.NFL ? FantasyProsNFLScoringType :
+        T extends League.NBA ? FantasyProsNBAScoringType :
+            T extends League.NHL ? FantasyProsNHLScoringType :
                 never;
 
-export type GetRankingsParameters<T extends FantasyProsClientSports> =
-    T extends Sport.NFL | Sport.NBA | Sport.NHL ? RankingsWithScoringProps<T> :
-        T extends Sport.MLB ? RankingsProps<T> :
+export type GetRankingsParameters<T extends FantasyProsClientLeague> =
+    T extends League.NFL | League.NBA | League.NHL ? RankingsWithScoringProps<T> :
+        T extends League.MLB ? RankingsProps<T> :
             never;
 
 
-export interface RankingsProps<T extends FantasyProsClientSports> {
+export interface RankingsProps<T extends FantasyProsClientLeague> {
     /**
      * The positions to return the rankings for. If omitted, all will be searched.
      */
@@ -176,7 +176,7 @@ export interface RankingsProps<T extends FantasyProsClientSports> {
     week?: number;
 }
 
-export interface RankingsWithScoringProps<T extends Omit<FantasyProsClientSports, Sport.MLB>> extends RankingsProps<T> {
+export interface RankingsWithScoringProps<T extends Omit<FantasyProsClientLeague, League.MLB>> extends RankingsProps<T> {
     /**
      * Leagues scoring type
      */

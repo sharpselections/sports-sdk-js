@@ -2,7 +2,7 @@ import * as nba from "./nba";
 import * as nhl from "./nhl";
 import * as nfl from "./nfl";
 import * as mlb from "./mlb";
-import {Sport} from "@sports-sdk/core";
+import {League} from "@sports-sdk/core";
 
 export type { MlbTeamInfo, MlbPlayerInfo, MlbPlayerStats, MlbSchedule, MlbTeamStats } from "./mlb";
 export {
@@ -21,44 +21,44 @@ export {
 	NhlTeamInfoSchema, NhlTeamStatsSchema, NhlPlayerStatsSchema, NhlPlayerInfoSchema, NhlScheduleSchema,
 } from "./nhl";
 
-export type SportScheduleMap = {
-	[Sport.EPL]: mlb.MlbSchedule;
-	[Sport.MLB]: mlb.MlbSchedule;
-	[Sport.NBA]: nba.NbaSchedule;
-	[Sport.NCAAF]: mlb.MlbSchedule;
-	[Sport.NFL]: nfl.NflSchedule;
-	[Sport.NHL]: nhl.NhlSchedule;
+export type LeagueScheduleMap = {
+	[League.EPL]: mlb.MlbSchedule;
+	[League.MLB]: mlb.MlbSchedule;
+	[League.NBA]: nba.NbaSchedule;
+	[League.NCAAF]: mlb.MlbSchedule;
+	[League.NFL]: nfl.NflSchedule;
+	[League.NHL]: nhl.NhlSchedule;
 };
 
-export type SportTeamInfoMap = {
-	[Sport.EPL]: mlb.MlbTeamInfo;
-	[Sport.MLB]: mlb.MlbTeamInfo;
-	[Sport.NBA]: nba.NbaTeamInfo;
-	[Sport.NCAAF]: mlb.MlbTeamInfo;
-	[Sport.NFL]: nfl.NflTeamInfo;
-	[Sport.NHL]: nhl.NhlTeamInfo;
+export type LeagueTeamInfoMap = {
+	[League.EPL]: mlb.MlbTeamInfo;
+	[League.MLB]: mlb.MlbTeamInfo;
+	[League.NBA]: nba.NbaTeamInfo;
+	[League.NCAAF]: mlb.MlbTeamInfo;
+	[League.NFL]: nfl.NflTeamInfo;
+	[League.NHL]: nhl.NhlTeamInfo;
 };
-export type SportPlayerInfoMap = {
-	[Sport.EPL]: mlb.MlbPlayerInfo;
-	[Sport.MLB]: mlb.MlbPlayerInfo;
-	[Sport.NBA]: nba.NbaPlayerInfo;
-	[Sport.NCAAF]: mlb.MlbPlayerInfo;
-	[Sport.NFL]: nfl.NflPlayerInfo;
-	[Sport.NHL]: nhl.NhlPlayerInfo;
+export type LeaguePlayerInfoMap = {
+	[League.EPL]: mlb.MlbPlayerInfo;
+	[League.MLB]: mlb.MlbPlayerInfo;
+	[League.NBA]: nba.NbaPlayerInfo;
+	[League.NCAAF]: mlb.MlbPlayerInfo;
+	[League.NFL]: nfl.NflPlayerInfo;
+	[League.NHL]: nhl.NhlPlayerInfo;
 };
-export type SportTeamStatsMap = {
-	[Sport.EPL]: mlb.MlbTeamStats;
-	[Sport.MLB]: mlb.MlbTeamStats;
-	[Sport.NBA]: nba.NbaTeamStats;
-	[Sport.NCAAF]: mlb.MlbTeamStats;
-	[Sport.NFL]: nfl.NflTeamStats;
-	[Sport.NHL]: nhl.NhlTeamStats;
+export type LeagueTeamStatsMap = {
+	[League.EPL]: mlb.MlbTeamStats;
+	[League.MLB]: mlb.MlbTeamStats;
+	[League.NBA]: nba.NbaTeamStats;
+	[League.NCAAF]: mlb.MlbTeamStats;
+	[League.NFL]: nfl.NflTeamStats;
+	[League.NHL]: nhl.NhlTeamStats;
 };
-export type SportPlayerStatsMap = {
-	[Sport.EPL]: mlb.MlbPlayerStats;
-	[Sport.MLB]: mlb.MlbPlayerStats;
-	[Sport.NBA]: nba.NbaPlayerStats;
-	[Sport.NCAAF]: mlb.MlbPlayerStats;
-	[Sport.NFL]: nfl.NflPlayerStats;
-	[Sport.NHL]: nhl.NhlPlayerStats;
+export type LeaguePlayerStatsMap = {
+	[League.EPL]: mlb.MlbPlayerStats;
+	[League.MLB]: mlb.MlbPlayerStats;
+	[League.NBA]: nba.NbaPlayerStats;
+	[League.NCAAF]: mlb.MlbPlayerStats;
+	[League.NFL]: nfl.NflPlayerStats;
+	[League.NHL]: nhl.NhlPlayerStats;
 };

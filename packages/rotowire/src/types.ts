@@ -1,4 +1,4 @@
-import {Sport} from "@sports-sdk/core";
+import {League} from "@sports-sdk/core";
 import {MLBInjuriesResponse, MLBNewsResponse} from "./news/baseball.ts";
 import {NCAAFInjuriesResponse, NCAAFNewsResponse, NFLInjuriesResponse, NFLNewsResponse} from "./news/football.ts";
 import {EPLInjuriesResponse, EPLNewsResponse} from "./news/soccer.ts";
@@ -9,37 +9,37 @@ import {SoccerLineupsParameters, SoccerLineupsResponse} from "./lineups/soccer.t
 import {NBALineupsParameters, NBALineupsResponse} from "./lineups/basketball.ts";
 import {PlayersFreeAgentsTeams, PlayersPlayer, PlayersTeam, PlayersTeamDetailed} from "./players";
 
-export type NewsResponse<T extends Sport> =
-    T extends Sport.MLB ? MLBNewsResponse :
-        T extends Sport.NFL ? NFLNewsResponse :
-            T extends Sport.NCAAF ? NCAAFNewsResponse :
-                T extends Sport.EPL ? EPLNewsResponse :
-                    T extends Sport.NBA ? NBANewsResponse :
-                        T extends Sport.NHL ? NHLNewsResponse :
+export type NewsResponse<T extends League> =
+    T extends League.MLB ? MLBNewsResponse :
+        T extends League.NFL ? NFLNewsResponse :
+            T extends League.NCAAF ? NCAAFNewsResponse :
+                T extends League.EPL ? EPLNewsResponse :
+                    T extends League.NBA ? NBANewsResponse :
+                        T extends League.NHL ? NHLNewsResponse :
                             never;
 
-export type InjuriesResponse<T extends Sport> =
-    T extends Sport.MLB ? MLBInjuriesResponse :
-        T extends Sport.NFL ? NFLInjuriesResponse :
-            T extends Sport.NCAAF ? NCAAFInjuriesResponse :
-                T extends Sport.EPL ? EPLInjuriesResponse :
-                    T extends Sport.NBA ? NBAInjuriesResponse :
-                        T extends Sport.NHL ? NHLInjuriesResponse :
+export type InjuriesResponse<T extends League> =
+    T extends League.MLB ? MLBInjuriesResponse :
+        T extends League.NFL ? NFLInjuriesResponse :
+            T extends League.NCAAF ? NCAAFInjuriesResponse :
+                T extends League.EPL ? EPLInjuriesResponse :
+                    T extends League.NBA ? NBAInjuriesResponse :
+                        T extends League.NHL ? NHLInjuriesResponse :
                             never;
 
-export type LineupsParams<T extends Sport> =
-    T extends Sport.MLB ? MLBLineupsParameters :
-        T extends Sport.EPL ? SoccerLineupsParameters :
-            T extends Sport.NBA ? NBALineupsParameters :
+export type LineupsParams<T extends League> =
+    T extends League.MLB ? MLBLineupsParameters :
+        T extends League.EPL ? SoccerLineupsParameters :
+            T extends League.NBA ? NBALineupsParameters :
                 never;
 
-export type LineupResponse<T extends Sport> =
-    T extends Sport.MLB ? MLBLineupsResponse :
-        T extends Sport.EPL ? SoccerLineupsResponse :
-            T extends Sport.NBA ? NBALineupsResponse :
+export type LineupResponse<T extends League> =
+    T extends League.MLB ? MLBLineupsResponse :
+        T extends League.EPL ? SoccerLineupsResponse :
+            T extends League.NBA ? NBALineupsResponse :
                 never;
 
-export type PlayersResponse<T extends Sport> =
-    T extends Sport.NCAAF ? Array<PlayersPlayer> :
-        T extends Sport.EPL ? PlayersFreeAgentsTeams<PlayersPlayer, PlayersTeam<PlayersPlayer>>:
+export type PlayersResponse<T extends League> =
+    T extends League.NCAAF ? Array<PlayersPlayer> :
+        T extends League.EPL ? PlayersFreeAgentsTeams<PlayersPlayer, PlayersTeam<PlayersPlayer>>:
             PlayersFreeAgentsTeams<PlayersPlayer, PlayersTeamDetailed<PlayersPlayer>>;
