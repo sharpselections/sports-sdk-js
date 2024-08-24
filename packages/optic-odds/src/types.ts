@@ -202,7 +202,7 @@ export interface BaseFixture {
     status: string,
 }
 
-export interface FixtureEntity extends BaseEntity {
+export interface FixtureEntity extends BaseFixture {
     away_rotation_number?: number | null,
     away_starter: string | null,
     broadcast: string | null,
