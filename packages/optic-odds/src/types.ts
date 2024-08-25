@@ -31,7 +31,7 @@ export interface GetMarketsProps {
     sportsbook?: string;
 }
 
-export interface GetPlayersProps extends PagedProps{
+export interface GetPlayersProps extends PagedProps {
     include_statsperform_id?: boolean;
     team_id?: [];
 }
@@ -42,13 +42,13 @@ export interface GetSportsbooksProps {
     sport?: string;
 }
 
-export interface GetTeamsProps extends PagedProps{
+export interface GetTeamsProps extends PagedProps {
     conference?: [];
     division?: [];
     include_statsperform_id?: boolean;
 }
 
-export interface GetInjuriesProps extends Omit<CommonProps, "ids">{
+export interface GetInjuriesProps extends Omit<CommonProps, "ids"> {
     team_id?: [];
 }
 
@@ -57,7 +57,7 @@ export interface GetFuturesProps {
     tournament_ids: [];
 }
 
-export interface GetFuturesOddsProps extends CommonOddsProps{
+export interface GetFuturesOddsProps extends CommonOddsProps {
     future?: string[];
     future_id?: string[];
 }
@@ -88,12 +88,12 @@ export interface GetH2HResultsProps {
     team2_id: string;
 }
 
-export interface GetOddsProps extends Omit<CommonOddsProps, "names" | "leagues">{
+export interface GetOddsProps extends Omit<CommonOddsProps, "names" | "leagues"> {
     fixture_id?: string[];
     market?: string[];
 }
 
-export interface GetFixturesProps extends GetTeamsProps{
+export interface GetFixturesProps extends GetTeamsProps {
     active?: boolean;
     include_starting_lineups?: boolean;
     is_live?: boolean;
@@ -102,7 +102,7 @@ export interface GetFixturesProps extends GetTeamsProps{
     season_year?: string;
     start_date?: string;
     start_date_after?: string;
-    start_date_before?:string;
+    start_date_before?: string;
     team_id?: string[];
 }
 
@@ -135,15 +135,18 @@ export type Competitor = BaseEntity & {
     logo: string | null;
 }
 
-export type InPlayData = {
+export type BaseInPlayData = {
+    clock?: string | null;
+    last_play?: string | null;
+    period?: string | null;
+}
+
+export type InPlayData = BaseInPlayData & {
     balls?: number | null;
     batter?: DynamicObject | null;
-    clock?: string | null;
     distance_to_go?: string | null;
     down?: number | null;
-    last_play?: string | null;
     outs?: number | null;
-    period?: string | null;
     pitcher?: DynamicObject | null;
     possession?: string | null;
     runners?: DynamicObject | null;
@@ -160,8 +163,8 @@ export type LineupPlayer = {
     player_team: string | null;
 }
 
-export type Result = {
-    in_play_data: InPlayData | null,
+export type Result<T extends BaseInPlayData> = {
+    in_play_data: T | null,
     scores: TeamScores;
 } | null;
 
@@ -214,7 +217,7 @@ export interface FixtureEntity extends BaseFixture {
         away: Array<LineupPlayer>,
         home: Array<LineupPlayer>
     } | null,
-    result?: Result,
+    result?: Result<BaseInPlayData>,
     season_type: string | null,
     season_week: string | null,
     season_year: string | null,
