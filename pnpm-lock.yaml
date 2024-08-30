@@ -320,6 +320,52 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  packages/odds-blaze:
+    dependencies:
+      '@sports-sdk/core':
+        specifier: workspace:*
+        version: link:../core
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@sports-sdk/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@sports-sdk/jest':
+        specifier: workspace:*
+        version: link:../jest
+      '@sports-sdk/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/jest':
+        specifier: ^29.5.12
+        version: 29.5.12
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.10
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.14.10)
+      nock:
+        specifier: ^13.5.4
+        version: 13.5.4
+      ts-jest:
+        specifier: ^29.1.5
+        version: 29.2.2(@babel/core@7.24.8)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.8))(esbuild@0.21.5)(jest@29.7.0(@types/node@20.14.10))(typescript@5.3.3)
+      tsup:
+        specifier: ^8.1.0
+        version: 8.1.0(postcss@8.4.31)(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   packages/optic-odds:
     dependencies:
       '@sports-sdk/core':

@@ -25,12 +25,12 @@ export interface ApiTestCases<T> {
     params?: any;
 }
 
-export const nockApiTests = <T>(client: T, nockEndpoint: nock.Scope, testCases: Array<ApiTestCases<T>>) => {
+export const nockApiTests = <T>(client: T, nockEndpoint: nock.Scope, testCases: Array<ApiTestCases<T>>, sleep?: number) => {
     afterEach(() => {
         nock.cleanAll();
     });
     describe("with nock", () => {
-        testCases.forEach(({method, nockTests, params, name}) => {
+        testCases.forEach(async ({method, nockTests, params, name}) => {
             if (nockTests) {
                 const {path, expectedResult, expectedResponse, query} = nockTests;
                 test((name || `getting ${path}`), async () => {
@@ -38,14 +38,17 @@ export const nockApiTests = <T>(client: T, nockEndpoint: nock.Scope, testCases: 
                     const result = await (client[method] as (params: any) => Promise<any>)(params ?? {});
                     expect(result).toEqual(expectedResult ?? expectedResponse);
                 });
+                if (sleep) {
+                    await testSleep(sleep);
+                }
             }
         });
     });
 };
 
-export const liveApiTests = <T>(client: T, testCases: Array<ApiTestCases<T>>) => {
+export const liveApiTests = <T>(client: T, testCases: Array<ApiTestCases<T>>, sleep?: number) => {
     describe("with the live endpoint", () => {
-        testCases.forEach(({method, liveTests, params, name}) => {
+        testCases.forEach(async ({method, liveTests, params, name}) => {
             if (liveTests) {
                 const {passes, properties} = liveTests;
                 if (passes !== undefined || properties?.length) {
@@ -66,16 +69,24 @@ export const liveApiTests = <T>(client: T, testCases: Array<ApiTestCases<T>>) =>
                         }
                     });
                 }
+                if (sleep) {
+                    await testSleep(sleep);
+                }
             }
         });
     });
 };
 
-export const allApiTests = <T>({client, testCases, nockEndpoint}: {
+export const allApiTests = <T>({client, testCases, nockEndpoint, sleep}: {
     client: T,
     nockEndpoint: nock.Scope,
+    sleep?: number;
     testCases: Array<ApiTestCases<T>>
 }) => {
-    nockApiTests<T>(client, nockEndpoint, testCases);
-    liveApiTests<T>(client, testCases);
+    nockApiTests<T>(client, nockEndpoint, testCases, sleep);
+    liveApiTests<T>(client, testCases, sleep);
 };
+
+function testSleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
