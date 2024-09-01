@@ -65,7 +65,7 @@ export class RollingInsightsClient extends SportsSdkClient {
      * @returns The response data from the API or undefined if the API returns 304
      * @throws Will throw an error if the request fails.
      */
-    private async request<T>(url: string, additionalParams: AdditionalParams = {}, league: League): Promise<T | undefined> {
+    private async request<T>(url: string, additionalParams: AdditionalParams = {}, league?: League): Promise<T | undefined> {
         const {team_id, player_id} = additionalParams;
 
         // Handle cases where both team_id and player_id are provided
@@ -77,7 +77,7 @@ export class RollingInsightsClient extends SportsSdkClient {
         const response = await this.session.get(`${url}?${Date.now()}`, {params});
 
         if (response.status === 200) {
-            return response.data.data[this.leaguesMap[league]] as T;
+            return league ? response.data.data[this.leaguesMap[league]] as T : response.data.data as T;
         }
         if (response.status === 304) {
             return undefined;
@@ -179,7 +179,7 @@ export class RollingInsightsClient extends SportsSdkClient {
     public async getLive({date = "now", league, teamId, gameId}: {
         date?: string,
         gameId?: string,
-        league: League,
+        league?: League,
         teamId?: string
     }): Promise<any> {
         const apiPath = this.buildApiPath("/live", date, league);
