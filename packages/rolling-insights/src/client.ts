@@ -20,6 +20,14 @@ type AdditionalParams = {
 
 export class RollingInsightsClient extends SportsSdkClient {
     protected readonly rscToken: string;
+    private leaguesMap = {
+        [League.EPL]: "EPL",
+        [League.MLB]: "MLB",
+        [League.NBA]: "NBA",
+        [League.NFL]: "NFL",
+        [League.NCAAF]: "NCAAFB",
+        [League.NHL]: "NHL",
+    }
 
     /**
      * Creates a  Rolling Insights client.
@@ -33,10 +41,10 @@ export class RollingInsightsClient extends SportsSdkClient {
             headers: {
                 "Content-Type": "application/json",
             },
-			validateStatus: function(status) {
+            validateStatus: function (status) {
                 // Rolling Insights returns 304 fairly often, need to be able to handle it
-				return status < 300 || status == 304;
-			},
+                return status < 300 || status == 304;
+            },
         });
         super(endpoint, session);
         const token = rscToken || process.env.DATA_FEEDS_RSC_TOKEN;
@@ -89,9 +97,9 @@ export class RollingInsightsClient extends SportsSdkClient {
         if (date) apiPath += `/${date}`;
         if (leagues) {
             if (Array.isArray(leagues)) {
-                apiPath += `/${leagues.join("-")}`;
+                apiPath += `/${leagues.map(league => this.leaguesMap[league]).join("-")}`;
             } else {
-                apiPath += `/${leagues}`;
+                apiPath += `/${this.leaguesMap[leagues]}`;
             }
         }
         return apiPath;
