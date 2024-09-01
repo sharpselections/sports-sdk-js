@@ -77,7 +77,7 @@ export class RollingInsightsClient extends SportsSdkClient {
         const response = await this.session.get(`${url}?${Date.now()}`, {params});
 
         if (response.status === 200) {
-            return response.data.data[league] as T;
+            return response.data.data[this.leaguesMap[league]] as T;
         }
         if (response.status === 304) {
             return undefined;
