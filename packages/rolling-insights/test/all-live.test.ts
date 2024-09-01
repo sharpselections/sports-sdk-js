@@ -8,7 +8,7 @@ describe("Rolling Insights client live tests", () => {
     const nockEndpoint = nock("http://rest.datafeeds.rolling-insights.com/api/v1");
     for (const sport of Object.values(League)) {
         if (sport === League.EPL || sport === League.NCAAF){
-            // EPL and NCAAF types aren't added yet
+            // EPL and NCAAF types aren't fully added yet
             continue;
         }
         describe(sport, () => {

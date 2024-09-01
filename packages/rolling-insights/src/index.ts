@@ -20,10 +20,13 @@ export type {
 	NhlSchedule,
 	NhlTeamInfo,
 	NhlTeamStats,
+	NcaafPlayerInfo,
+	NcaafTeamInfo
 } from "./types";
 export {
 	MlbTeamInfoSchema, MlbTeamStatsSchema, MlbPlayerStatsSchema, MlbPlayerInfoSchema, MlbScheduleSchema,
 	NbaPlayerInfoSchema, NbaPlayerStatsSchema, NbaScheduleSchema, NbaTeamInfoSchema, NbaTeamStatsSchema,
 	NflScheduleSchema, NflTeamInfoSchema, NflTeamStatsSchema, NflPlayerInfoSchema, NflPlayerStatsSchema,
 	NhlTeamInfoSchema, NhlTeamStatsSchema, NhlPlayerStatsSchema, NhlPlayerInfoSchema, NhlScheduleSchema,
+	NcaafPlayerInfoSchema, NcaafTeamInfoSchema,
 } from "./types";
