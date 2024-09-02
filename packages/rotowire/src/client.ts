@@ -58,9 +58,12 @@ export class RotowireClient<S extends League> extends SportsSdkClient {
      * Retrieves players for the selected league. The typing of the response is intentionally sparse as this endpoint is primarily useful for retrieving RW player ids.
      * @supports ALL
      */
-    public async getPlayers<T extends PlayersResponse<S> = PlayersResponse<S>>(): Promise<T> {
+    public async getPlayers<T extends PlayersResponse<S> = PlayersResponse<S>>(letter?: string): Promise<T> {
         return this.request<T>({
             apiPath: "/Players.php",
+            additionalParams: letter ? {
+                letter: letter,
+            } : undefined,
         });
     }
 
