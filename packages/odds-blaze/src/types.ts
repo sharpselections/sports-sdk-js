@@ -6,7 +6,7 @@ export type OddsBlazeSubDomains = "api" | "data" | "sgp";
 
 export interface OddsProps {
     league: OddsBlazeLeague;
-    sportsbook: OddsBlazeSportsbooks;
+    sportsbook: OddsBlazeSportsbooks | OddsBlazeSGPSportsbooks;
 }
 
 export interface BetSettlementProps {
