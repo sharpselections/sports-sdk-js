@@ -20,7 +20,8 @@ export const SoccerLineupTeamSchema = z.object({
   Name: z.string(),
   LineupStatus: LineupStatusSchema,
   Players: z.array(SoccerLineupPlayerSchema),
-  Id: z.number()
+  Id: z.number(),
+  IsHome: z.boolean(),
 });
 
 export const SoccerLineupGameSchema = z.object({
