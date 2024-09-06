@@ -162,13 +162,13 @@ export class RollingInsightsClient extends SportsSdkClient {
     public async getDailySchedule({date = "now", league, teamId, gameId}: {
         date?: string,
         gameId?: string,
-        league: League,
+        league?: League,
         teamId?: string
-    }): Promise<Array<LeagueScheduleMap[typeof league]> | undefined> {
+    }): Promise<any> {
         const apiPath = this.buildApiPath("/schedule", date, league);
         const additionalParams = this.buildAdditionalParams(teamId, gameId);
 
-        return await this.request<Array<LeagueScheduleMap[typeof league]>>(apiPath, additionalParams, league);
+        return await this.request<any>(apiPath, additionalParams, league);
     }
 
     /**
