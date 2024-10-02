@@ -61,6 +61,10 @@ export class OddsBlazeClient {
                 return OddsBlazeLeague.MLB;
             case League.NCAAF:
                 return OddsBlazeLeague.NCAAF;
+            case League.NBA:
+                return OddsBlazeLeague.NBA;
+            case League.NHL:
+                return OddsBlazeLeague.NHL;
             default:
                 throw new Error("OddsBlaze does not support this league yet");
         }

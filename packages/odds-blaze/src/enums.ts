@@ -5,8 +5,11 @@ export enum OddsBlazeLeague {
     LOL = "league_of_legends",
     MLB = "mlb",
     MLS = "united_states_major_league_soccer",
+    NBA = "nba",
     NCAAF = "ncaaf",
     NFL = "nfl",
+    NHL = "nhl",
+    UFC = "ufc",
     Valorant = "valorant",
     WNBA = "wnba"
 }
