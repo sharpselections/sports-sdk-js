@@ -47,6 +47,7 @@ export enum OddsBlazeSGPSportsbooks {
 export enum OddsBlazeSportsbooks {
     BETFAIR_UNITED_KINGDOM = "betfair_united_kingdom",
     BETFRED_UNITED_KINGDOM = "betfred_united_kingdom",
+    BETMGM = "betmgm",
     BETMGM_COLORADO = "betmgm_colorado",
     BETMGM_ONTARIO = "betmgm_ontario",
     BETONLINE = "betonline",
