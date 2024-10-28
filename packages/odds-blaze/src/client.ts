@@ -109,11 +109,19 @@ export class OddsBlazeClient {
     }
 
     public async getOdds(props: OddsProps) {
-        const {league, sportsbook} = props;
+        const {league, sportsbook, main, live} = props;
+        const params: { [key: string]: any } = {}
+        if (main) {
+            params["main"] = main;
+        }
+        if (live) {
+            params["live"] = live;
+        }
         return await this.request<OddsResponse>({
             subDomain: "data",
             path: `/odds/${sportsbook}_${league}.json`,
-        })
+            additionalParams: main || live ? params : undefined
+        });
     }
 
     public async settleBets(props: BetSettlementProps) {

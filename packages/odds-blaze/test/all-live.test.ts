@@ -17,8 +17,19 @@ describe("OddsBlaze client live tests", () => {
                 method: "getOdds",
                 liveTests: {passes: true},
                 params: {
-                    league: OddsBlazeLeague.MLB,
+                    league: OddsBlazeLeague.NFL,
                     sportsbook: OddsBlazeSGPSportsbooks.DRAFTKINGS,
+                }
+
+            },
+            {
+                method: "getOdds",
+                liveTests: {passes: true},
+                params: {
+                    league: OddsBlazeLeague.NFL,
+                    sportsbook: OddsBlazeSGPSportsbooks.DRAFTKINGS,
+                    main: true,
+                    live: false
                 }
 
             },
