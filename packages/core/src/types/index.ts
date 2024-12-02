@@ -4,6 +4,7 @@ export enum League {
     MLB = "MLB",
     NBA = "NBA",
     NCAAF = "NCAAF",
+    NCAAM = "NCAAM",
     NFL = "NFL",
     NHL = "NHL"
 }

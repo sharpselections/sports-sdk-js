@@ -7,6 +7,7 @@ export enum OddsBlazeLeague {
     MLS = "united_states_major_league_soccer",
     NBA = "nba",
     NCAAF = "ncaaf",
+    NCAAM = "ncaab",
     NFL = "nfl",
     NHL = "nhl",
     UFC = "ufc",

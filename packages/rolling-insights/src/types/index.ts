@@ -3,6 +3,7 @@ import * as nhl from "./nhl";
 import * as nfl from "./nfl";
 import * as mlb from "./mlb";
 import * as ncaaf from "./ncaaf";
+import * as ncaam from "./ncaam";
 import {League} from "@sports-sdk/core";
 
 export type {MlbTeamInfo, MlbPlayerInfo, MlbPlayerStats, MlbSchedule, MlbTeamStats} from "./mlb";
@@ -23,6 +24,8 @@ export {
 } from "./nhl";
 export type {NcaafPlayerInfo, NcaafTeamInfo} from "./ncaaf"
 export {NcaafPlayerInfoSchema, NcaafTeamInfoSchema} from "./ncaaf"
+export type {NcaamPlayerInfo, NcaamTeamInfo} from "./ncaam"
+export {NcaamPlayerInfoSchema, NcaamTeamInfoSchema} from "./ncaam"
 
 export type LeagueScheduleMap = {
     [League.EPL]: mlb.MlbSchedule;
@@ -31,6 +34,7 @@ export type LeagueScheduleMap = {
     [League.NCAAF]: mlb.MlbSchedule;
     [League.NFL]: nfl.NflSchedule;
     [League.NHL]: nhl.NhlSchedule;
+    [League.NCAAM]: mlb.MlbSchedule;
 };
 
 export type LeagueTeamInfoMap = {
@@ -40,6 +44,7 @@ export type LeagueTeamInfoMap = {
     [League.NCAAF]: ncaaf.NcaafTeamInfo;
     [League.NFL]: nfl.NflTeamInfo;
     [League.NHL]: nhl.NhlTeamInfo;
+    [League.NCAAM]: ncaam.NcaamTeamInfo;
 };
 export type LeaguePlayerInfoMap = {
     [League.EPL]: mlb.MlbPlayerInfo;
@@ -48,6 +53,7 @@ export type LeaguePlayerInfoMap = {
     [League.NCAAF]: ncaaf.NcaafPlayerInfo;
     [League.NFL]: nfl.NflPlayerInfo;
     [League.NHL]: nhl.NhlPlayerInfo;
+    [League.NCAAM]: ncaam.NcaamPlayerInfo;
 };
 export type LeagueTeamStatsMap = {
     [League.EPL]: mlb.MlbTeamStats;
@@ -56,6 +62,7 @@ export type LeagueTeamStatsMap = {
     [League.NCAAF]: mlb.MlbTeamStats;
     [League.NFL]: nfl.NflTeamStats;
     [League.NHL]: nhl.NhlTeamStats;
+    [League.NCAAM]: mlb.MlbTeamStats;
 };
 export type LeaguePlayerStatsMap = {
     [League.EPL]: mlb.MlbPlayerStats;
@@ -64,4 +71,5 @@ export type LeaguePlayerStatsMap = {
     [League.NCAAF]: mlb.MlbPlayerStats;
     [League.NFL]: nfl.NflPlayerStats;
     [League.NHL]: nhl.NhlPlayerStats;
+    [League.NCAAM]: mlb.MlbPlayerStats;
 };

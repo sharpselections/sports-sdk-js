@@ -27,6 +27,7 @@ export class RollingInsightsClient extends SportsSdkClient {
         [League.NFL]: "NFL",
         [League.NCAAF]: "NCAAFB",
         [League.NHL]: "NHL",
+        [League.NCAAM]: "NCAABB",
     }
 
     /**
