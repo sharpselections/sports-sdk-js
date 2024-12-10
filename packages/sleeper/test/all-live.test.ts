@@ -1,5 +1,5 @@
 import {SleeperClient, SleeperClientLeaguesList} from "../src";
-import {allApiTests} from "@sports-sdk/core";
+import {allApiTests} from "@sports-sdk/testing";
 
 const nock = require("nock");
 
