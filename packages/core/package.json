@@ -1,8 +1,8 @@
 {
   "name": "@sports-sdk/core",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "./dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
@@ -28,5 +28,12 @@
     "@sports-sdk/tsconfig": "workspace:*",
     "@types/node": "^20.14.10",
     "eslint": "^8.57.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   }
 }
