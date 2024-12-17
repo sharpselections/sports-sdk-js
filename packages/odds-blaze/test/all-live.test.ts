@@ -77,6 +77,13 @@ describe("OddsBlaze client live tests", () => {
                     league: OddsBlazeLeague.MLB
                 }
             },
+            {
+                method: "getOddsStatus",
+                liveTests: {passes: true},
+                params: {
+                    league: OddsBlazeLeague.NFL
+                }
+            },
         ]
     })
 })
