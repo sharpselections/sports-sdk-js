@@ -1,12 +1,16 @@
-import {RUWTClient} from "../src";
-import {allApiTests} from "@sports-sdk/core";
+import {RUWTClient, RUWTSport} from "../src";
+// @ts-ignore
+import {allApiTests} from "@sports-sdk/testing";
 import {
     GAMES_RESPONSE,
-    ODDS_RESPONSE, ODDS_SPLITS_RESPONSE,
+    ODDS_RESPONSE,
+    ODDS_SPLITS_RESPONSE,
     PLAYER_STATS_RESPONSE,
     PLAYERS_RESPONSE,
     SIDE_ODDS_RESPONSE,
-    SPORTS_RESPONSE, STANDINGS_RESPONSE, TEAMS_RESPONSE
+    SPORTS_RESPONSE,
+    STANDINGS_RESPONSE,
+    TEAMS_RESPONSE
 } from "./responses";
 
 const nock = require("nock");
@@ -195,4 +199,11 @@ describe("Are You Watching This?! client tests", () => {
         const team1Stats = superBowlLI?.results?.[0]?.statistics?.team1;
         expect(team1Stats?.FOOTBALL_PASSING_TOUCHDOWNS?.[0].value).toEqual(2);
     });
+    test("can get basketball injuries", async () => {
+        const injuries = await client.getInjuries({
+            sport: RUWTSport.nba
+        });
+        expect(injuries).toBeDefined();
+        console.log(injuries);
+    })
 });

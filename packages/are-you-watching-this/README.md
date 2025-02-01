@@ -16,7 +16,7 @@ npm i @sports-sdk/ruwt
 | Events              | :heavy_multiplication_x: | :heavy_multiplication_x: |
 | Games               | :heavy_check_mark:       | :heavy_check_mark:       |
 | Headlines           | :heavy_multiplication_x: | :heavy_multiplication_x: |
-| Injuries            | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| Injuries            | :heavy_check_mark:       | :heavy_check_mark:       |
 | Links               | :heavy_multiplication_x: | :heavy_multiplication_x: |
 | Odds (GameOdds)     | :heavy_check_mark:       | :heavy_check_mark:       |
 | Odds Splits         | :heavy_check_mark:       | :heavy_check_mark:       |

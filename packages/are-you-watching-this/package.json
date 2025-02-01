@@ -24,7 +24,7 @@
     "MMA",
     "WNBA"
   ],
-  "version": "2.0.1",
+  "version": "2.1.0",
   "main": "./dist/index.js",
   "module": "dist/index.esm.js",
   "types": "./dist/index.d.ts",
@@ -47,6 +47,7 @@
   "devDependencies": {
     "@sports-sdk/eslint-config": "workspace:*",
     "@sports-sdk/jest": "workspace:*",
+    "@sports-sdk/testing": "workspace:*",
     "@sports-sdk/tsconfig": "workspace:*",
     "@types/node": "^20.14.10",
     "@types/jest": "^29.5.12",
